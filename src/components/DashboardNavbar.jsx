@@ -3,11 +3,11 @@ import React from "react";
 
 const DashboardNavbar = () => {
   return (
-    <div>
-      <ul className="flex flex-col gap-5">
-        <Link href={"/dashboard/my-requests"}>My Requests</Link>
-        <Link href={"/dashboard/add-pet"}>Add Pet</Link>
-        <Link href={"/dashboard/my-listing"}>My Listings</Link>
+    <div className="w-[40%] ">
+      <ul className="flex flex-col  gap-5">
+        <Link className="bg-gray-400" href={"/dashboard/my-requests"}>My Requests</Link>
+        <Link className="bg-gray-400" href={"/dashboard/add-pet"}>Add Pet</Link>
+        <Link className="bg-gray-400" href={"/dashboard/my-listing"}>My Listings</Link>
       </ul>
     </div>
   );
