@@ -1,7 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { Check, Eye, EyeSlash } from "@gravity-ui/icons";
+import { Eye, EyeSlash } from "@gravity-ui/icons";
 import {
   Button,
   FieldError,
@@ -15,27 +15,23 @@ import Link from "next/link";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 
-const RegistrationPage = () => {
+const LoginPage = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isVisible2, setIsVisible2] = useState(false);
-  const [passwordValue, setPasswordValue] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const userData = Object.fromEntries(formData.entries());
-
-    const { data, error } = await authClient.signUp.email({
-      name: userData.name,
+    console.log(userData);
+    const { data, error } = await authClient.signIn.email({
       email: userData.email,
       password: userData.password,
-      confirmPassword: userData.confirmPassword,
-      image: userData.image,
+      rememberMe: true,
+      callbackURL: "/",
     });
-    console.log("DATA:", data);
-    console.log("ERROR:", error);
+
     if (data) {
-      alert("signup successful");
+      alert("Login successful");
     }
     if (error) {
       alert(error.message);
@@ -49,38 +45,10 @@ const RegistrationPage = () => {
         onSubmit={handleRegister}
       >
         <div className="mb-2 text-center">
-          <h2 className="text-3xl font-bold text-gray-800">Create Account</h2>
+          <h2 className="text-3xl font-bold text-gray-800">Login Account</h2>
 
-          <p className="mt-1 text-gray-500">
-            Welcome! Please enter your details
-          </p>
+          <p className="mt-1 text-gray-500">Welcome Back ! Your account</p>
         </div>
-
-        <TextField
-          className="w-full"
-          name="name"
-          type="text"
-          validate={(value) => {
-            if (!value) {
-              return "Name is required";
-            }
-
-            if (value.length < 3) {
-              return "Name must be at least 3 characters";
-            }
-
-            return null;
-          }}
-        >
-          <Label>Full Name</Label>
-
-          <Input
-            placeholder="Enter your name"
-            className="h-12 rounded-xl border border-gray-300 px-4"
-          />
-
-          <FieldError className="mt-1 text-sm text-red-500" />
-        </TextField>
 
         <TextField
           className="w-full"
@@ -102,28 +70,6 @@ const RegistrationPage = () => {
 
           <Input
             placeholder="example@gmail.com"
-            className="h-12 rounded-xl border border-gray-300 px-4"
-          />
-
-          <FieldError className="mt-1 text-sm text-red-500" />
-        </TextField>
-
-        <TextField
-          className="w-full"
-          name="image"
-          type="url"
-          validate={(value) => {
-            if (!value) {
-              return "Photo URL is required";
-            }
-
-            return null;
-          }}
-        >
-          <Label>Photo URL</Label>
-
-          <Input
-            placeholder="https://example.com/photo.jpg"
             className="h-12 rounded-xl border border-gray-300 px-4"
           />
 
@@ -158,8 +104,6 @@ const RegistrationPage = () => {
           <InputGroup className="relative">
             <InputGroup.Input
               name="password"
-              value={passwordValue}
-              onChange={(e) => setPasswordValue(e.target.value)}
               className="h-12 w-full rounded-xl border border-gray-300 px-4 pr-10"
               type={isVisible ? "text" : "password"}
               placeholder="Enter your password"
@@ -185,57 +129,11 @@ const RegistrationPage = () => {
           <FieldError className="mt-1 text-sm text-red-500" />
         </TextField>
 
-        <TextField
-          className="w-full"
-          name="confirmPassword"
-          validate={(value) => {
-            if (!value) {
-              return "Confirm Password is required";
-            }
-
-            if (value !== passwordValue) {
-              return "Passwords do not match";
-            }
-
-            return null;
-          }}
-        >
-          <Label>Confirm Password</Label>
-
-          <InputGroup className="relative">
-            <InputGroup.Input
-              name="confirmPassword"
-              className="h-12 w-full rounded-xl border border-gray-300 px-4 pr-10"
-              type={isVisible2 ? "text" : "password"}
-              placeholder="Confirm your password"
-            />
-
-            <InputGroup.Suffix className="absolute top-1/2 right-3 -translate-y-1/2">
-              <Button
-                isIconOnly
-                aria-label={isVisible2 ? "Hide password" : "Show password"}
-                size="sm"
-                variant="ghost"
-                onPress={() => setIsVisible2(!isVisible2)}
-              >
-                {isVisible2 ? (
-                  <Eye className="size-4" />
-                ) : (
-                  <EyeSlash className="size-4" />
-                )}
-              </Button>
-            </InputGroup.Suffix>
-          </InputGroup>
-
-          <FieldError className="mt-1 text-sm text-red-500" />
-        </TextField>
-
         <Button
           type="submit"
-          className="h-12 rounded-xl bg-black font-semibold text-white transition-all hover:bg-gray-800"
+          className="h-12 w-full rounded-xl bg-black font-semibold text-white transition-all hover:bg-gray-800"
         >
-          <Check className="mr-2 h-4 w-4" />
-          Create Account
+          Login
         </Button>
 
         <div className="relative flex items-center">
@@ -256,13 +154,13 @@ const RegistrationPage = () => {
           </Button>
         </div>
 
-        <p className="text-center text-sm text-gray-500">
-          Already have an account?{" "}
+        <p className="text-center  text-sm text-gray-500">
+          Don't have an account?
           <Link
-            href="/login"
-            className="font-semibold text-black hover:underline"
+            href="/register"
+            className="font-semibold  text-black hover:underline"
           >
-            Login
+            Register
           </Link>
         </p>
       </Form>
@@ -270,4 +168,4 @@ const RegistrationPage = () => {
   );
 };
 
-export default RegistrationPage;
+export default LoginPage;
