@@ -61,8 +61,10 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="hidden items-center gap-4 md:flex">
-          <Link href="#">Login</Link>
-          <Button>Sign Up</Button>
+          <Link href="/login">Login</Link>
+          <Link href="/registration">
+            <Button>Sign Up</Button>
+          </Link>
         </div>
       </header>
       {isMenuOpen && (
