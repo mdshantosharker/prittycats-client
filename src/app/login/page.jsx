@@ -38,6 +38,12 @@ const LoginPage = () => {
     }
   };
 
+  const handleGoogle = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
   return (
     <div className="min-h-[70vh] my-10 flex items-center justify-center px-4">
       <Form
@@ -146,6 +152,7 @@ const LoginPage = () => {
 
         <div className="text-center">
           <Button
+            onClick={handleGoogle}
             variant="secondary"
             className="h-12 rounded-xl border border-gray-300 bg-white hover:bg-gray-50"
           >
