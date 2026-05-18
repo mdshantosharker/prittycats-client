@@ -1,9 +1,13 @@
 "use client";
 import { useState } from "react";
-import { Link, Button } from "@heroui/react";
+import { Link, Button, Avatar } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data } = authClient.useSession();
+  const userData = data?.user;
+
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
       <header className="mx-auto flex h-16 container items-center justify-between px-6">
@@ -50,21 +54,39 @@ const Navbar = () => {
             <Link href="/all-pets">All Pets</Link>
           </li>
 
-          <li>
-            <Link
-              href="/dashboard/my-requests"
-              className="font-medium text-accent"
-              aria-current="page"
-            >
-              Dashboard
-            </Link>
-          </li>
+          {userData && (
+            <li>
+              <Link
+                href="/dashboard/my-requests"
+                className="font-medium text-accent"
+                aria-current="page"
+              >
+                Dashboard
+              </Link>
+            </li>
+          )}
         </ul>
         <div className="hidden items-center gap-4 md:flex">
-          <Link href="/login">Login</Link>
-          <Link href="/registration">
-            <Button>Sign Up</Button>
-          </Link>
+          {userData ? (
+            <>
+              <Avatar>
+                <Avatar.Image
+                  alt="John Doe"
+                  src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
+                />
+                <Avatar.Fallback>JD</Avatar.Fallback>
+              </Avatar>
+
+              <Button variant="danger-soft">LogOut</Button>
+            </>
+          ) : (
+            <>
+              <Link href="/login">Login</Link>
+              <Link href="/registration">
+                <Button>Sign Up</Button>
+              </Link>
+            </>
+          )}
         </div>
       </header>
       {isMenuOpen && (
