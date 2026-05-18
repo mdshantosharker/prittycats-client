@@ -1,119 +1,168 @@
 "use client";
 import { useState } from "react";
-import { Link, Button, Avatar } from "@heroui/react";
+import Link from "next/link";
+import { Button, Avatar } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleLogoOut = async () => {
+    await authClient.signOut();
+  };
+  const pathname = usePathname();
   const { data } = authClient.useSession();
-  const userData = data?.user;
+  const user = data?.user;
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/all-pets", label: "Pets" },
+    ...(user ? [{ href: "/dashboard/my-requests", label: "Dashboard" }] : []),
+  ];
+
+  const isActive = (href) => pathname === href;
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
-      <header className="mx-auto flex h-16 container items-center justify-between px-6">
-        <div className="flex items-center gap-4">
-          <button
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-          >
-            <span className="sr-only">Menu</span>
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-          <div className="flex items-center gap-3">
-            <h1 className="font-bold text-3xl">PrittyCats</h1>
-          </div>
-        </div>
-        <ul className="hidden items-center gap-4 md:flex">
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/all-pets">All Pets</Link>
-          </li>
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-[85%] rounded-2xl backdrop-blur-xl bg-slate-900/30 border border-white/10 shadow-xl">
+      <div className="flex items-center justify-between px-5 py-3 text-white">
+        <Link href="/" className="text-xl font-bold tracking-wide">
+          🐱 PrittyCats
+        </Link>
 
-          {userData && (
-            <li>
+        <ul className="hidden md:flex items-center gap-2">
+          {navLinks.map((item) => (
+            <li key={item.href}>
               <Link
-                href="/dashboard/my-requests"
-                className="font-medium text-accent"
-                aria-current="page"
+                href={item.href}
+                className={`px-4 py-2 rounded-full text-sm transition ${
+                  isActive(item.href)
+                    ? "bg-white/10 border border-white/20"
+                    : "hover:bg-white/5"
+                }`}
               >
-                Dashboard
+                {item.label}
               </Link>
             </li>
-          )}
+          ))}
         </ul>
-        <div className="hidden items-center gap-4 md:flex">
-          {userData ? (
-            <>
-              <Avatar>
-                <Avatar.Image
-                  alt="John Doe"
-                  src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3"
-                />
-                <Avatar.Fallback>JD</Avatar.Fallback>
-              </Avatar>
 
-              <Button variant="danger-soft">LogOut</Button>
+        <div className="hidden md:flex items-center gap-3">
+          {user ? (
+            <>
+              <div className="flex items-center gap-3 px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                <Avatar>
+                  <Avatar.Image referrerPolicy="no-referrer" src={user.image} />
+                  <Avatar.Fallback>{user.name?.slice(0, 2)}</Avatar.Fallback>
+                </Avatar>
+
+                <div className="flex flex-col leading-tight">
+                  <span className="text-sm font-medium text-white">
+                    {user.name}
+                  </span>
+                  <span className="text-[10px] text-white/50">Active</span>
+                </div>
+              </div>
+
+              <Button
+                onClick={handleLogoOut}
+                className="rounded-full bg-white/10 hover:bg-white/20 text-white"
+              >
+                Logout
+              </Button>
             </>
           ) : (
             <>
-              <Link href="/login">Login</Link>
+              <Link
+                href="/login"
+                className="text-sm text-white/70 hover:text-white transition"
+              >
+                Login
+              </Link>
+
               <Link href="/registration">
-                <Button>Sign Up</Button>
+                <Button className="rounded-full bg-white text-black hover:bg-white/80">
+                  Sign Up
+                </Button>
               </Link>
             </>
           )}
         </div>
-      </header>
+
+        <button
+          className="md:hidden text-white text-2xl"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? "✕" : "☰"}
+        </button>
+      </div>
+
       {isMenuOpen && (
-        <div className="border-t border-separator md:hidden">
-          <ul className="flex flex-col gap-2 p-4">
-            <li>
-              <Link href="#" className="block py-2">
-                Features
+        <div className="md:hidden px-5 pb-5 text-white">
+          <div className="flex flex-col gap-2">
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                className={`py-2 px-3 rounded-xl text-sm transition ${
+                  isActive(item.href)
+                    ? "bg-white/10 border border-white/20"
+                    : "hover:bg-white/5"
+                }`}
+              >
+                {item.label}
               </Link>
-            </li>
-            <li>
-              <Link href="#" className="block py-2 font-medium text-accent">
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="block py-2">
-                Pricing
-              </Link>
-            </li>
-            <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-              <Link href="#" className="block py-2">
-                Login
-              </Link>
-              <Button className="w-full">Sign Up</Button>
-            </li>
-          </ul>
+            ))}
+
+            <div className="my-2 border-t border-white/10" />
+
+            {user ? (
+              <>
+                {/* PROFILE MOBILE */}
+                <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/5 border border-white/10">
+                  <Avatar>
+                    <Avatar.Image
+                      referrerPolicy="no-referrer"
+                      src={user.image}
+                    />
+                    <Avatar.Fallback>{user.name?.slice(0, 2)}</Avatar.Fallback>
+                  </Avatar>
+
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-sm font-medium text-white">
+                      {user.name}
+                    </span>
+                    <span className="text-[10px] text-white/50">
+                      Active User
+                    </span>
+                  </div>
+                </div>
+
+                <Button
+                  onClick={handleLogoOut}
+                  className="w-full rounded-xl bg-white/10 text-white"
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="py-2 px-3 rounded-xl hover:bg-white/5"
+                >
+                  Login
+                </Link>
+
+                <Link href="/registration" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full rounded-xl bg-white text-black">
+                    Sign Up
+                  </Button>
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       )}
     </nav>
