@@ -1,10 +1,10 @@
 "use client";
+
 import { Button, Modal } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { FaUsers } from "react-icons/fa";
 
 const Requests = ({ petId }) => {
-  console.log(petId);
   const [adopted, setAdopted] = useState([]);
 
   useEffect(() => {
@@ -16,9 +16,22 @@ const Requests = ({ petId }) => {
 
     getData();
   }, [petId]);
-  console.log(adopted);
 
-  const filteredRequests = adopted.filter((req) => req.petId === petId);
+  const updateStatus = async (id, status) => {
+    const res = await fetch(`http://localhost:5000/adopted/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status }),
+    });
+
+    const data = await res.json();
+    setAdopted((prev) =>
+      prev.map((item) => (item._id === id ? { ...item, status } : item)),
+    );
+  };
+
   return (
     <Modal>
       <Button
@@ -46,8 +59,8 @@ const Requests = ({ petId }) => {
 
             <Modal.Body>
               <div className="space-y-5">
-                {filteredRequests.length > 0 ? (
-                  filteredRequests.map((request, index) => (
+                {adopted.length > 0 ? (
+                  adopted.map((request, index) => (
                     <div
                       key={index}
                       className="border border-gray-100 rounded-3xl p-5 shadow-sm"
@@ -83,11 +96,21 @@ const Requests = ({ petId }) => {
 
                       {request.status === "pending" && (
                         <div className="flex gap-3 mt-6">
-                          <button className="flex-1 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold">
+                          <button
+                            onClick={() =>
+                              updateStatus(request._id, "approved")
+                            }
+                            className="flex-1 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold transition"
+                          >
                             Approve
                           </button>
 
-                          <button className="flex-1 py-3 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-semibold">
+                          <button
+                            onClick={() =>
+                              updateStatus(request._id, "rejected")
+                            }
+                            className="flex-1 py-3 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-semibold transition"
+                          >
                             Reject
                           </button>
                         </div>
@@ -95,12 +118,6 @@ const Requests = ({ petId }) => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-center text-gray-500">
-                    No adoption requests for this pet yet 🐾
-                  </p>
-                )}
-
-                {adopted.length === 0 && (
                   <div className="text-center py-16">
                     <FaUsers className="mx-auto text-5xl text-gray-300 mb-4" />
 

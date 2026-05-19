@@ -6,7 +6,7 @@ import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import Requests from "./Requests";
 
 const ListingSection = ({ pets }) => {
-  console.log(pets);
+//   console.log(pets);
   //   const [selectedRequests, setSelectedRequests] = useState(null);
   const [available, setAvailable] = useState(pets.length);
   const [adopt, setAdopt] = useState(0);
