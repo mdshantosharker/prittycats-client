@@ -1,69 +1,131 @@
-import React from "react";
+"use client";
+import Lottie from "lottie-react";
+import animationData from "../../assets/cat_full.json";
 import Link from "next/link";
+import Image from "next/image";
 
 const BannerPage = () => {
   return (
-    <section className="relative mt-36 min-h-[85vh] flex items-center justify-center px-6 bg-white overflow-hidden">
+    <section className="relative overflow-hidden bg-white min-h-screen flex items-center justify-center pt-36 py-20 px-6">
       <div className="absolute inset-0 -z-10">
-        <div className="absolute -top-30 left-1/2 -translate-x-1/2 w-175 h-175 bg-indigo-200/40 blur-[160px] rounded-full"></div>
-        <div className="absolute -bottom-45 -right-30 w-125 h-125 bg-pink-200/30 blur-[160px] rounded-full"></div>
+        <div className="absolute -top-30 -left-20 w-105 h-105 bg-pink-200/40 blur-[140px] rounded-full"></div>
+
+        <div className="absolute -bottom-30 -right-20 w-105 h-105 bg-indigo-200/40 blur-[140px] rounded-full"></div>
+
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 h-75 bg-purple-100/30 blur-[120px] rounded-full"></div>
       </div>
 
-      <div className="text-center max-w-3xl">
-        <div
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full 
-        bg-gray-50 border border-gray-200 text-gray-600 text-xs mb-6 shadow-sm"
-        >
-          🐱 Cat Adoption Platform
-        </div>
+      <div className=" w-full mx-auto grid lg:grid-cols-2 justify-between items-center">
+        <div className="text-center lg:text-left">
+          <div
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full
+            border border-gray-200 bg-white shadow-sm text-sm text-gray-600"
+          >
+            🐾 Welcome to PrittyCats
+          </div>
 
-        <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-          Find Your Perfect <br />
-          <span className="bg-gradient-to-r from-indigo-500 to-pink-500 bg-clip-text text-transparent">
-            Furry Companion
-          </span>
-        </h1>
+          <h1 className="mt-8 text-5xl md:text-7xl font-black leading-tight text-gray-900">
+            Find Your
+            <span className="block bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+              Perfect Cat
+            </span>
+            Companion
+          </h1>
 
-        <p className="mt-6 text-gray-600 text-sm md:text-base leading-relaxed">
-          Adopt loving cats from verified shelters. Give them a forever home and
-          bring happiness into your life while saving a precious soul.
-        </p>
+          <p className="mt-6 text-gray-500 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+            Discover adorable cats waiting for a loving home. Adopt, rescue, and
+            make unforgettable memories with your new furry friend.
+          </p>
 
-        <div className="flex justify-center my-10">
-          <div className="relative">
-            <div className="absolute inset-0 blur-3xl bg-indigo-300/30 rounded-full animate-pulse"></div>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <Link href="/all-pets">
+              <button
+                className="px-8 py-4 rounded-2xl bg-linear-to-r 
+                from-pink-500 to-indigo-500 text-white font-semibold
+                shadow-lg hover:scale-105 hover:shadow-pink-200 
+                transition duration-300"
+              >
+                Adopt Now 🐱
+              </button>
+            </Link>
 
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/616/616430.png"
-              alt="cat"
-              className="w-40 md:w-52 relative hover:scale-105 transition duration-300"
-            />
+            <Link href="/about">
+              <button
+                className="px-8 py-4 rounded-2xl bg-white border border-gray-200
+                text-gray-700 font-semibold shadow-sm hover:bg-gray-50
+                hover:scale-105 transition duration-300"
+              >
+                Learn More
+              </button>
+            </Link>
+          </div>
+
+          <div className="mt-12 flex items-center justify-center lg:justify-start gap-8 flex-wrap">
+            <div>
+              <h3 className="text-3xl font-bold text-gray-900">500+</h3>
+              <p className="text-gray-500 text-sm">Cats Adopted</p>
+            </div>
+
+            <div className="w-px h-10 bg-gray-200"></div>
+
+            <div>
+              <h3 className="text-3xl font-bold text-gray-900">100%</h3>
+              <p className="text-gray-500 text-sm">Happy Families</p>
+            </div>
+
+            <div className="w-px h-10 bg-gray-200"></div>
+
+            <div>
+              <h3 className="text-3xl font-bold text-gray-900">24/7</h3>
+              <p className="text-gray-500 text-sm">Support</p>
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/all-pets">
-            <button
-              className="px-8 py-3 rounded-full bg-indigo-500 hover:bg-indigo-600
-             text-white font-semibold shadow-md hover:scale-105 transition duration-300"
-            >
-              Adopt a Cat 🐾
-            </button>
-          </Link>
+        <div className="relative flex justify-center lg:justify-end">
+          <div className="absolute w-125 h-125 rounded-full"></div>
 
-          <Link href="/about">
-            <button
-              className="px-8 py-3 rounded-full bg-white
-             text-gray-700 border border-gray-200 hover:bg-gray-50 transition shadow-sm"
+          <div
+            className="relative w-full max-w-130 bg-white/80 backdrop-blur-xl
+            border border-white shadow-2xl rounded-[40px]
+            p-6 md:p-10"
+          >
+            <div className="w-full max-w-105 mx-auto">
+              <Lottie animationData={animationData} loop={true} />
+            </div>
+
+            <div
+              className="absolute top-6 -left-4 md:-left-8 bg-white shadow-lg
+              px-5 py-3 rounded-2xl border border-pink-100"
             >
-              Learn More
-            </button>
-          </Link>
+              <p className="text-sm font-semibold text-gray-700">
+                😻 2k+ Cat Lovers
+              </p>
+            </div>
+
+            <div
+              className="absolute bottom-6 -right-4 md:-right-8 bg-white shadow-lg
+              px-5 py-3  rounded-2xl border border-indigo-100"
+            >
+              <p className="text-sm font-semibold text-gray-700">
+                🐾 Safe Adoption
+              </p>
+            </div>
+
+            <div
+              className="absolute top-1/2 -left-6 bg-white shadow-xl
+              rounded-2xl p-3 border border-gray-100"
+            >
+              <Image
+                src="https://cdn-icons-png.flaticon.com/512/616/616430.png"
+                alt="cat"
+                width={56}
+                height={56}
+                className="w-14 h-14"
+              />
+            </div>
+          </div>
         </div>
-
-        <p className="mt-10 text-xs text-gray-400">
-          💜 Trusted by animal lovers • Every adoption matters
-        </p>
       </div>
     </section>
   );
