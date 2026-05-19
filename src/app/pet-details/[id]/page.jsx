@@ -1,3 +1,4 @@
+import AdoptionFrom from "@/components/AdoptionFrom";
 
 const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -5,14 +6,11 @@ const PetDetailsPage = async ({ params }) => {
     method: "GET",
   });
   const pet = await res.json();
-  //   console.log(pet);
-  
+
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-5">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-       
+    <div className="min-h-screen pb-32 bg-gray-100 pt-36 py-10 px-5">
+      <div className="container px-6 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 bg-white rounded-3xl shadow-lg overflow-hidden">
-        
           <div className="h-112.5 overflow-hidden">
             <img
               src={pet.imageUrl}
@@ -21,7 +19,6 @@ const PetDetailsPage = async ({ params }) => {
             />
           </div>
 
-      
           <div className="p-8">
             <div className="flex items-center justify-between mb-6">
               <h1 className="text-4xl font-bold">{pet.name}</h1>
@@ -75,7 +72,6 @@ const PetDetailsPage = async ({ params }) => {
               </div>
             </div>
 
-            
             <div className="mt-8">
               <h3 className="font-semibold text-gray-800 text-xl mb-2">
                 Description
@@ -86,85 +82,7 @@ const PetDetailsPage = async ({ params }) => {
           </div>
         </div>
 
-       
-        <div className="bg-white rounded-3xl shadow-lg p-6 h-fit sticky top-10">
-          <h2 className="text-3xl font-bold mb-6 text-center">Adoption Form</h2>
-
-          <form  className="space-y-5">
-            
-            <div>
-              <label className="block mb-2 font-medium">Pet Name</label>
-
-              <input
-                type="text"
-                name="petName"
-                value={pet.name}
-                readOnly
-                className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
-              />
-            </div>
-
-           
-            <div>
-              <label className="block mb-2 font-medium">User Name</label>
-
-              <input
-                type="text"
-                name="userName"
-                // value={user?.displayName}
-                readOnly
-                className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
-              />
-            </div>
-
-            
-            <div>
-              <label className="block mb-2 font-medium">User Email</label>
-
-              <input
-                type="email"
-                name="userEmail"
-                // value={user?.email}
-                readOnly
-                className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
-              />
-            </div>
-
-            {/* Pickup Date */}
-            <div>
-              <label className="block mb-2 font-medium">Pickup Date</label>
-
-              <input
-                type="date"
-                name="pickupDate"
-                className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-black"
-              />
-            </div>
-
-            {/* Message */}
-            <div>
-              <label className="block mb-2 font-medium">Message</label>
-
-              <textarea
-                rows="5"
-                name="message"
-                placeholder="Why do you want to adopt this pet?"
-                className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-black"
-              ></textarea>
-            </div>
-
-            {/* Hidden Status */}
-            <input type="hidden" name="status" value="pending" />
-
-            {/* Button */}
-            <button
-              type="submit"
-              className="w-full bg-black text-white py-4 rounded-xl text-lg font-semibold hover:bg-gray-800 transition"
-            >
-              Adopt Now
-            </button>
-          </form>
-        </div>
+        <AdoptionFrom pet={pet} />
       </div>
     </div>
   );
