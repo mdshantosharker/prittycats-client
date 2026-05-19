@@ -49,7 +49,7 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="min-h-[70vh] my-10 flex items-center justify-center px-4">
+    <div className="min-h-[70vh]  my-36 flex items-center justify-center px-4">
       <Form
         className="flex w-full max-w-md flex-col gap-5 rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
         onSubmit={handleRegister}
