@@ -164,7 +164,7 @@ const LoginPage = () => {
         <p className="text-center  text-sm text-gray-500">
           Don't have an account?
           <Link
-            href="/register"
+            href="/registration"
             className="font-semibold  text-black hover:underline"
           >
             Register
