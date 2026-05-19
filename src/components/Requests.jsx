@@ -36,7 +36,7 @@ const Requests = ({ petId }) => {
     <Modal>
       <Button
         variant="solid"
-        className="w-full bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl font-semibold"
+        className="w-full py-6  flex items-center justify-center gap-2 transition bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl font-semibold"
       >
         <FaUsers />
         Requests

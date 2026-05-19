@@ -6,8 +6,6 @@ import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import Requests from "./Requests";
 
 const ListingSection = ({ pets }) => {
-//   console.log(pets);
-  //   const [selectedRequests, setSelectedRequests] = useState(null);
   const [available, setAvailable] = useState(pets.length);
   const [adopt, setAdopt] = useState(0);
   return (
@@ -50,8 +48,8 @@ const ListingSection = ({ pets }) => {
           >
             <div className="relative h-64 overflow-hidden">
               <Image
-                src={pet.imageUrl}
-                alt={pet.name}
+                src={pet?.imageUrl || ""}
+                alt={pet?.name || "pet"}
                 fill
                 className="object-cover group-hover:scale-110 transition duration-500"
               />
@@ -113,7 +111,7 @@ const ListingSection = ({ pets }) => {
                   </button>
                 </Link>
 
-                <Link href={`/dashboard/update-pet/${pet._id}`}>
+                <Link href={`/dashboard/update/${pet._id}`}>
                   <button className="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-semibold flex items-center justify-center gap-2 transition">
                     <FaEdit />
                     Edit
