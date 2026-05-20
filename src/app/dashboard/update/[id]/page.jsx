@@ -28,7 +28,7 @@ const UpdatePage = () => {
     const formData = new FormData(e.currentTarget);
     const petData = Object.fromEntries(formData.entries());
     // console.log(petData);
-    const res = await fetch(`http://localhost:5000/adopted-details/${id}`, {
+    const res = await fetch(`http://localhost:5000/pets/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -37,6 +37,7 @@ const UpdatePage = () => {
     });
     const pet = await res.json();
     console.log(pet);
+    console.log("Sending update:", petData);
   };
 
   return (
@@ -54,7 +55,8 @@ const UpdatePage = () => {
             <label className="block mb-2 font-medium">Pet Name</label>
             <input
               type="text"
-              defaultValue={pet?.name}
+              defaultValue={pet?.name
+}         required
               placeholder="Enter pet name"
               name="name"
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"

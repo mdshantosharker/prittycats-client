@@ -111,7 +111,7 @@ const ListingSection = ({ pets }) => {
               <div className="grid grid-cols-2 gap-3">
                 <Requests petId={pet.petId} />
 
-                <Link href={`/pet-details/${pet._id}`}>
+                <Link href={`/pet-details/${pet.petId}`}>
                   <button className="w-full cursor-pointer py-3 rounded-2xl border border-gray-300 hover:bg-gray-100 text-gray-700 font-semibold flex items-center justify-center gap-2 transition">
                     <FaEye />
                     View

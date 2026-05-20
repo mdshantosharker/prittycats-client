@@ -7,8 +7,11 @@ import Swal from "sweetalert2";
 const AdoptionFrom = ({ pet }) => {
   const [picUpDate, setPicUpDate] = useState(null);
   const [massage, setMassage] = useState(null);
+  console.log(pet);
   // console.log(new Date(picUpDate));
-  const { adoptionFee, location, imageUrl } = pet;
+  const { adoptionFee, location, imageUrl ,age,breed,gender,healthStatus
+
+} = pet;
   const { data } = authClient.useSession();
   const user = data?.user;
 
@@ -24,6 +27,7 @@ const AdoptionFrom = ({ pet }) => {
       imageUrl,
       location,
       massage,
+      age,breed,gender,healthStatus,
       picUpDate: new Date(picUpDate),
       status: "pending",
     };
