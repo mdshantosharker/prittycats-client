@@ -9,9 +9,7 @@ const Requests = ({ petId }) => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch(`http://localhost:5000/adopted/${petId}`, {
-        method: "GET",
-      });
+      const res = await fetch(`http://localhost:5000/adopted/${petId}`);
       const data = await res.json();
       setAdopted(data.adopted || data);
     };
@@ -38,7 +36,7 @@ const Requests = ({ petId }) => {
     <Modal>
       <Button
         variant="solid"
-        className="w-full py-6  flex items-center justify-center gap-2 transition bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl font-semibold"
+        className="w-full bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl font-semibold"
       >
         <FaUsers />
         Requests

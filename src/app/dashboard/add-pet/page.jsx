@@ -22,7 +22,7 @@ const AddPetPage = () => {
     //   body: JSON.stringify(petData),
     // }).then((res) => res.json());
 
-    console.log({ pet, adopted });
+    console.log({ pet });
   };
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-5">

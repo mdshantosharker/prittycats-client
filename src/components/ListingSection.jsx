@@ -7,7 +7,7 @@ import Requests from "./Requests";
 import DeleteModal from "./DeleteModal";
 
 const ListingSection = ({ pets }) => {
-  // console.log(pets);
+  console.log(pets);
   // const [available, setAvailable] = useState(pets.length);
   const [adopt, setAdopt] = useState(0);
 
@@ -61,10 +61,6 @@ const ListingSection = ({ pets }) => {
                 className="object-cover group-hover:scale-110 transition duration-500"
               />
 
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-bold text-gray-700">
-                {pet.species}
-              </div>
-
               <div className="absolute top-4 right-4 bg-black text-white px-4 py-1 rounded-full text-xs font-semibold">
                 ${pet.adoptionFee}
               </div>
@@ -113,7 +109,7 @@ const ListingSection = ({ pets }) => {
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <Requests petId={pet._id} />
+                <Requests petId={pet.petId} />
 
                 <Link href={`/pet-details/${pet._id}`}>
                   <button className="w-full cursor-pointer py-3 rounded-2xl border border-gray-300 hover:bg-gray-100 text-gray-700 font-semibold flex items-center justify-center gap-2 transition">
