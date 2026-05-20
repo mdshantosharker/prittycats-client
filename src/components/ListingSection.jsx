@@ -4,10 +4,13 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import Requests from "./Requests";
+import DeleteModal from "./DeleteModal";
 
 const ListingSection = ({ pets }) => {
-  const [available, setAvailable] = useState(pets.length);
+  // console.log(pets);
+  // const [available, setAvailable] = useState(pets.length);
   const [adopt, setAdopt] = useState(0);
+
   return (
     <section className="min-h-screen bg-gray-50 p-6">
       <div className="mb-10">
@@ -30,11 +33,15 @@ const ListingSection = ({ pets }) => {
         <div className="bg-linear-to-r from-emerald-500 to-green-500 rounded-3xl p-6 text-white shadow-lg">
           <p className="text-sm opacity-90">Available Pets</p>
 
-          <h2 className="text-4xl font-black mt-2">{available}</h2>
+          {/* <h2 className="text-4xl font-black mt-2">{available}</h2> */}
+          <h2>
+            {pets.filter((p) => p.status === "available" || !p.status).length}
+          </h2>
         </div>
 
         <div className="bg-linear-to-r from-pink-500 to-rose-500 rounded-3xl p-6 text-white shadow-lg">
-          <p className="text-sm opacity-90">Adopted Pets</p>
+          {/* <p className="text-sm opacity-90">Adopted Pets</p> */}
+          <h2>{pets.filter((p) => p.status === "adopted").length}</h2>
 
           <h2 className="text-4xl font-black mt-2">{adopt}</h2>
         </div>
@@ -80,7 +87,11 @@ const ListingSection = ({ pets }) => {
                       : "bg-emerald-100 text-emerald-600"
                   }`}
                 >
-                  {pet.status || "available"}
+                  {pet.status === "pending"
+                    ? "available"
+                    : pet.status === "approved"
+                      ? "approved"
+                      : "rejected"}
                 </span>
               </div>
 
@@ -105,23 +116,26 @@ const ListingSection = ({ pets }) => {
                 <Requests petId={pet._id} />
 
                 <Link href={`/pet-details/${pet._id}`}>
-                  <button className="w-full py-3 rounded-2xl border border-gray-300 hover:bg-gray-100 text-gray-700 font-semibold flex items-center justify-center gap-2 transition">
+                  <button className="w-full cursor-pointer py-3 rounded-2xl border border-gray-300 hover:bg-gray-100 text-gray-700 font-semibold flex items-center justify-center gap-2 transition">
                     <FaEye />
                     View
                   </button>
                 </Link>
 
                 <Link href={`/dashboard/update/${pet._id}`}>
-                  <button className="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-semibold flex items-center justify-center gap-2 transition">
+                  <button className="w-full cursor-pointer py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-semibold flex items-center justify-center gap-2 transition">
                     <FaEdit />
                     Edit
                   </button>
                 </Link>
 
-                <button className="py-3 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-semibold flex items-center justify-center gap-2 transition">
-                  <FaTrash />
-                  Delete
-                </button>
+                {/* <button
+                  
+                  className="py-3 rounded-2xl cursor-pointer bg-red-500 hover:bg-red-600 text-white font-semibold flex items-center justify-center gap-2 transition"
+                > */}
+
+                <DeleteModal pet={pet} />
+                {/* </button> */}
               </div>
             </div>
           </div>

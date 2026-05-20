@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const UpdatePage = () => {
   const { id } = useParams();
+  console.log(id);
   const { data } = authClient.useSession();
   const user = data?.user;
 
@@ -13,20 +14,21 @@ const UpdatePage = () => {
 
   useEffect(() => {
     const getPet = async () => {
-      const res = await fetch(`http://localhost:5000/pets/${id}`);
+      const res = await fetch(`http://localhost:5000/adopted-details/${id}`);
       const data = await res.json();
       setPet(data);
     };
 
     if (id) getPet();
   }, [id]);
-  // console.log(user);
+  console.log(pet);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const petData = Object.fromEntries(formData.entries());
     // console.log(petData);
-    const res = await fetch(`http://localhost:5000/pets/${id}`, {
+    const res = await fetch(`http://localhost:5000/adopted-details/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -36,11 +38,12 @@ const UpdatePage = () => {
     const pet = await res.json();
     console.log(pet);
   };
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-5">
       <div className="w-full max-w-3xl bg-white shadow-lg rounded-2xl p-8">
         <h1 className="text-3xl font-bold mb-6 text-center">
-          Add Pet For Adoption
+          Update Pet Adoption
         </h1>
 
         <form

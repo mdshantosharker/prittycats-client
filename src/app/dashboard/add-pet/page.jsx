@@ -3,18 +3,26 @@
 const AddPetPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const petData = Object.fromEntries(formData.entries());
-    console.log(petData);
-    const res = await fetch("http://localhost:5000/pets", {
+
+    const petData = Object.fromEntries(new FormData(e.currentTarget));
+
+    const pet = await fetch("http://localhost:5000/pets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(petData),
-    });
-    const pet = await res.json();
-    console.log(pet);
+    }).then((res) => res.json());
+
+    // const adopted = await fetch("http://localhost:5000/adopted", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(petData),
+    // }).then((res) => res.json());
+
+    console.log({ pet, adopted });
   };
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-5">

@@ -9,7 +9,9 @@ const Requests = ({ petId }) => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch(`http://localhost:5000/adopted/${petId}`);
+      const res = await fetch(`http://localhost:5000/adopted/${petId}`, {
+        method: "GET",
+      });
       const data = await res.json();
       setAdopted(data.adopted || data);
     };

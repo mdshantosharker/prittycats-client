@@ -7,18 +7,11 @@ const MyListing = async () => {
     headers: await headers(), // you need to pass the headers object.
   });
 //   console.log(session);
-  const res = await fetch("http://localhost:5000/pets", {
+  const res = await fetch("http://localhost:5000/adopted", {
     method: "GET",
   });
   const pets = await res.json();
-//   const resAdopt = await fetch(
-//     `http://localhost:5000/adopted/6a0c993a8a46cbb130447cc9`,
-//     {
-//       method: "GET",
-//     },
-//   );
-//   console.log(pets);
-//   const adopted = await resAdopt.json();
+
   return <ListingSection pets={pets} />;
 };
 
