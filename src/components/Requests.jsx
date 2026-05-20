@@ -77,7 +77,9 @@ const Requests = ({ petId }) => {
 
                           <p className="mt-3 text-sm text-gray-700">
                             <span className="font-semibold">Pickup Date:</span>{" "}
-                            {request.picUpDate}
+                            {request.picUpDate
+                              ? `${request.picUpDate.year}-${request.picUpDate.month}-${request.picUpDate.day}`
+                              : "N/A"}
                           </p>
                         </div>
 
