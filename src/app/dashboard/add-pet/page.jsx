@@ -1,6 +1,11 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
+
 const AddPetPage = () => {
+  const { data } = authClient.useSession();
+  // console.log(data);
+  const user = data?.user;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -148,8 +153,8 @@ const AddPetPage = () => {
             <input
               type="email"
               name="ownerEmail"
-              // value={user?.email}
-              // readOnly
+              value={user?.email ?? ""}
+              readOnly
               className="w-full border rounded-lg px-4 py-3 bg-gray-100 cursor-not-allowed"
             />
           </div>

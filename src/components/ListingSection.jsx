@@ -1,15 +1,19 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import { FaEdit, FaEye } from "react-icons/fa";
 import Requests from "./Requests";
 import DeleteModal from "./DeleteModal";
 
 const ListingSection = ({ pets }) => {
-  console.log(pets);
-  // const [available, setAvailable] = useState(pets.length);
-  const [adopt, setAdopt] = useState(0);
+  const total = pets?.length || 0;
+
+  const availableCount = pets.filter(
+    (p) => p.status === "available" || !p.status || p.status === "pending",
+  ).length;
+
+  const adoptedCount = pets.filter((p) => p.status === "approved").length;
 
   return (
     <section className="min-h-screen bg-gray-50 p-6">
@@ -24,26 +28,17 @@ const ListingSection = ({ pets }) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
           <p className="text-gray-500 text-sm">Total Listings</p>
-
-          <h2 className="text-4xl font-black mt-2 text-gray-900">
-            {pets.length}
-          </h2>
+          <h2 className="text-4xl font-black mt-2 text-gray-900">{total}</h2>
         </div>
 
         <div className="bg-linear-to-r from-emerald-500 to-green-500 rounded-3xl p-6 text-white shadow-lg">
           <p className="text-sm opacity-90">Available Pets</p>
-
-          {/* <h2 className="text-4xl font-black mt-2">{available}</h2> */}
-          <h2>
-            {pets.filter((p) => p.status === "available" || !p.status).length}
-          </h2>
+          <h2 className="text-4xl font-black mt-2">{availableCount}</h2>
         </div>
 
         <div className="bg-linear-to-r from-pink-500 to-rose-500 rounded-3xl p-6 text-white shadow-lg">
-          {/* <p className="text-sm opacity-90">Adopted Pets</p> */}
-          <h2>{pets.filter((p) => p.status === "adopted").length}</h2>
-
-          <h2 className="text-4xl font-black mt-2">{adopt}</h2>
+          <p className="text-sm opacity-90">Adopted Pets</p>
+          <h2 className="text-4xl font-black mt-2">{adoptedCount}</h2>
         </div>
       </div>
 
@@ -56,7 +51,7 @@ const ListingSection = ({ pets }) => {
             <div className="relative h-64 overflow-hidden">
               <Image
                 src={pet?.imageUrl || ""}
-                alt={pet?.name || "pet"}
+                alt={pet?.petName || "pet"}
                 fill
                 className="object-cover group-hover:scale-110 transition duration-500"
               />
@@ -66,28 +61,29 @@ const ListingSection = ({ pets }) => {
               </div>
             </div>
 
+          
             <div className="p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h2 className="text-2xl font-black text-gray-900">
                     {pet.name}
                   </h2>
-
                   <p className="text-sm text-gray-500 mt-1">{pet.breed}</p>
                 </div>
 
+                {/* STATUS */}
                 <span
                   className={`px-3 py-1 rounded-full text-xs font-bold ${
                     pet.status === "adopted"
                       ? "bg-pink-100 text-pink-600"
-                      : "bg-emerald-100 text-emerald-600"
+                      : pet.status === "approved"
+                        ? "bg-blue-100 text-blue-600"
+                        : pet.status === "rejected"
+                          ? "bg-red-100 text-red-600"
+                          : "bg-emerald-100 text-emerald-600"
                   }`}
                 >
-                  {pet.status === "pending"
-                    ? "available"
-                    : pet.status === "approved"
-                      ? "approved"
-                      : "rejected"}
+                  {pet.status || "available"}
                 </span>
               </div>
 
@@ -112,26 +108,20 @@ const ListingSection = ({ pets }) => {
                 <Requests petId={pet.petId} />
 
                 <Link href={`/pet-details/${pet.petId}`}>
-                  <button className="w-full cursor-pointer py-3 rounded-2xl border border-gray-300 hover:bg-gray-100 text-gray-700 font-semibold flex items-center justify-center gap-2 transition">
+                  <button className="w-full py-3 rounded-2xl border border-gray-300 hover:bg-gray-100 text-gray-700 font-semibold flex items-center justify-center gap-2 transition">
                     <FaEye />
                     View
                   </button>
                 </Link>
 
                 <Link href={`/dashboard/update/${pet._id}`}>
-                  <button className="w-full cursor-pointer py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-semibold flex items-center justify-center gap-2 transition">
+                  <button className="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-semibold flex items-center justify-center gap-2 transition">
                     <FaEdit />
                     Edit
                   </button>
                 </Link>
 
-                {/* <button
-                  
-                  className="py-3 rounded-2xl cursor-pointer bg-red-500 hover:bg-red-600 text-white font-semibold flex items-center justify-center gap-2 transition"
-                > */}
-
                 <DeleteModal pet={pet} />
-                {/* </button> */}
               </div>
             </div>
           </div>

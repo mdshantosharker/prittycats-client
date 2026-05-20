@@ -14,7 +14,7 @@ const UpdatePage = () => {
 
   useEffect(() => {
     const getPet = async () => {
-      const res = await fetch(`http://localhost:5000/adopted-details/${id}`);
+      const res = await fetch(`http://localhost:5000/pets/${id}`);
       const data = await res.json();
       setPet(data);
     };
@@ -27,7 +27,8 @@ const UpdatePage = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const petData = Object.fromEntries(formData.entries());
-    // console.log(petData);
+    console.log(petData);
+
     const res = await fetch(`http://localhost:5000/pets/${id}`, {
       method: "PATCH",
       headers: {
@@ -55,8 +56,7 @@ const UpdatePage = () => {
             <label className="block mb-2 font-medium">Pet Name</label>
             <input
               type="text"
-              defaultValue={pet?.name
-}         required
+              required
               placeholder="Enter pet name"
               name="name"
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
@@ -68,7 +68,6 @@ const UpdatePage = () => {
             <select
               name="species"
               required
-              defaultValue={pet?.species}
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >
               <option value="">Select Species</option>
@@ -82,7 +81,7 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Breed</label>
             <input
-              defaultValue={pet?.breed}
+              required
               type="text"
               placeholder="Enter breed"
               name="breed"
@@ -93,7 +92,7 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Age</label>
             <input
-              defaultValue={pet?.age}
+              required
               type="number"
               placeholder="Enter age"
               name="age"
@@ -104,7 +103,6 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Gender</label>
             <select
-              defaultValue={pet?.gender || ""}
               name="gender"
               required
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
@@ -118,7 +116,7 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Image URL</label>
             <input
-              defaultValue={pet?.imageUrl}
+              required
               type="text"
               placeholder="https://..."
               name="imageUrl"
@@ -129,7 +127,7 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Health Status</label>
             <input
-              defaultValue={pet?.healthStatus}
+              required
               type="text"
               placeholder="Healthy / Sick"
               name="healthStatus"
@@ -140,7 +138,6 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Vaccination Status</label>
             <select
-              defaultValue={pet?.vaccinationStatus}
               name="vaccinationStatus"
               required
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
@@ -154,7 +151,7 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Location</label>
             <input
-              defaultValue={pet?.location}
+              required
               type="text"
               placeholder="Enter location"
               name="location"
@@ -165,7 +162,7 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Adoption Fee</label>
             <input
-              defaultValue={pet?.adoptionFee}
+              required
               type="number"
               placeholder="Enter fee"
               name="adoptionFee"

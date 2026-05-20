@@ -6,11 +6,10 @@ import { FaEye, FaPaw } from "react-icons/fa";
 const AllPetsPage = async () => {
   const res = await fetch("http://localhost:5000/pets", {
     method: "GET",
-    cache: "no-store",
   });
 
   const pets = await res.json();
-
+  console.log(pets);
   return (
     <section className="mt-24 px-6 py-10">
       <div className="text-center mb-14">
@@ -29,7 +28,7 @@ const AllPetsPage = async () => {
             <div className="h-64 relative overflow-hidden">
               <Image
                 src={pet.imageUrl}
-                alt={pet.name}
+                alt={pet.petName || "Pet image"}
                 fill
                 className="object-cover group-hover:scale-110 transition duration-500"
               />
