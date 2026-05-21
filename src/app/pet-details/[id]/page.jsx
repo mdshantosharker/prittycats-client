@@ -2,7 +2,6 @@ import AdoptionFrom from "@/components/AdoptionFrom";
 
 const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
-  console.log(id);
   const res = await fetch(`http://localhost:5000/pets/${id}`, {
     method: "GET",
   });

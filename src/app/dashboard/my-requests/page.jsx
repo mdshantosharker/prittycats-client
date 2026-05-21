@@ -111,7 +111,7 @@ const MyRequestsPage = () => {
               <p className="text-xs text-gray-400 md:hidden">Pet Name</p>
 
               <h2 className="font-bold text-gray-900 text-lg">
-                {request.petName}
+                {request.name}
               </h2>
             </div>
 

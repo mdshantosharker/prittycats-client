@@ -1,15 +1,17 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
-
+import { ObjectId } from "bson";
 const AddPetPage = () => {
-  const { data } = authClient.useSession();
-  // console.log(data);
-  const user = data?.user;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const petData = Object.fromEntries(new FormData(e.currentTarget));
+    const id = new ObjectId().toString();
+
+    const petData = {
+      ...Object.fromEntries(new FormData(e.currentTarget)),
+      _id: id,
+      status: "pending",
+    };
 
     const pet = await fetch("http://localhost:5000/pets", {
       method: "POST",
@@ -19,15 +21,20 @@ const AddPetPage = () => {
       body: JSON.stringify(petData),
     }).then((res) => res.json());
 
-    // const adopted = await fetch("http://localhost:5000/adopted", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(petData),
-    // }).then((res) => res.json());
+    const adoptedData = {
+      ...petData,
+      petId: id,
+    };
 
-    console.log({ pet });
+    const adopted = await fetch("http://localhost:5000/adopted", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(adoptedData),
+    }).then((res) => res.json());
+
+    console.log({ pet, adopted });
   };
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-5">
@@ -153,8 +160,8 @@ const AddPetPage = () => {
             <input
               type="email"
               name="ownerEmail"
-              value={user?.email ?? ""}
-              readOnly
+              // value={user?.email}
+              // readOnly
               className="w-full border rounded-lg px-4 py-3 bg-gray-100 cursor-not-allowed"
             />
           </div>

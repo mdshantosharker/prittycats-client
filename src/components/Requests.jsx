@@ -1,27 +1,24 @@
 "use client";
 
 import { Button, Modal } from "@heroui/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaUsers } from "react-icons/fa";
 
 const Requests = ({ petId }) => {
-  const router = useRouter();
   const [adopted, setAdopted] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch(`http://localhost:5000/pets/${petId}`);
+      const res = await fetch(`http://localhost:5000/adopted/${petId}`);
       const data = await res.json();
       setAdopted(data.adopted || data);
     };
 
     getData();
   }, [petId]);
-  console.log(adopted);
 
   const updateStatus = async (id, status) => {
-    const res = await fetch(`http://localhost:5000/pets/${id}`, {
+    const res = await fetch(`http://localhost:5000/adopted/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -30,10 +27,8 @@ const Requests = ({ petId }) => {
     });
 
     const data = await res.json();
-    setAdopted(
-      (prev) =>
-        prev.map((item) => (item._id === id ? { ...item, status } : item)),
-      router.push("/dashboard/my-listing"),
+    setAdopted((prev) =>
+      prev.map((item) => (item._id === id ? { ...item, status } : item)),
     );
   };
 
