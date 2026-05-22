@@ -5,6 +5,7 @@ import { Button, Avatar } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const router = useRouter();
@@ -51,9 +52,13 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
+         
         </ul>
 
+        
+
         <div className="hidden md:flex items-center gap-3">
+           <div><ThemeToggle/></div>
           {user ? (
             <>
               <div className="relative flex items-center gap-3 px-3 py-1 rounded-full bg-white/5 border border-white/10">
