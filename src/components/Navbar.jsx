@@ -4,12 +4,17 @@ import Link from "next/link";
 import { Button, Avatar } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { usePathname } from "next/navigation";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   const handleLogoOut = async () => {
     await authClient.signOut();
+    toast.success("Logged out successfully");
   };
+
   const pathname = usePathname();
   const { data } = authClient.useSession();
   const user = data?.user;
@@ -49,26 +54,49 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-3">
           {user ? (
             <>
-              <div className="flex items-center gap-3 px-3 py-1 rounded-full bg-white/5 border border-white/10">
-                <Avatar>
-                  <Avatar.Image referrerPolicy="no-referrer" src={user.image} />
-                  <Avatar.Fallback>{user.name?.slice(0, 2)}</Avatar.Fallback>
-                </Avatar>
+              <div className="relative flex items-center gap-3 px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                <div
+                  className="flex items-center gap-3 cursor-pointer"
+                  onClick={() => setIsProfileOpen(!isProfileOpen)}
+                >
+                  <Avatar>
+                    <Avatar.Image
+                      referrerPolicy="no-referrer"
+                      src={user.image}
+                    />
+                    <Avatar.Fallback>{user.name?.slice(0, 2)}</Avatar.Fallback>
+                  </Avatar>
 
-                <div className="flex flex-col leading-tight">
-                  <span className="text-sm font-medium text-white">
-                    {user.name}
-                  </span>
-                  <span className="text-[10px] text-white/50">Active</span>
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-sm font-medium text-white">
+                      {user.name}
+                    </span>
+                    <span className="text-[10px] text-white/50">Active</span>
+                  </div>
                 </div>
-              </div>
 
-              <Button
-                onClick={handleLogoOut}
-                className="rounded-full bg-white/10 hover:bg-white/20 text-white"
-              >
-                Logout
-              </Button>
+                {isProfileOpen && (
+                  <div className="absolute right-0 top-12 w-44 bg-slate-900/90 border border-white/10 rounded-xl shadow-lg overflow-hidden">
+                    <Link
+                      href="/dashboard/my-requests"
+                      onClick={() => setIsProfileOpen(false)}
+                      className="block px-4 py-2 text-sm hover:bg-white/10"
+                    >
+                      Dashboard
+                    </Link>
+
+                    <button
+                      onClick={() => {
+                        setIsProfileOpen(false);
+                        handleLogoOut();
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm hover:bg-white/10"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             </>
           ) : (
             <>
@@ -118,7 +146,6 @@ const Navbar = () => {
 
             {user ? (
               <>
-                {/* PROFILE MOBILE */}
                 <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/5 border border-white/10">
                   <Avatar>
                     <Avatar.Image

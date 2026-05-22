@@ -14,15 +14,15 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleRegister = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const userData = Object.fromEntries(formData.entries());
-    console.log(userData);
     const { data, error } = await authClient.signIn.email({
       email: userData.email,
       password: userData.password,
@@ -31,10 +31,10 @@ const LoginPage = () => {
     });
 
     if (data) {
-      alert("Login successful");
+      toast.success("Login successful");
     }
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -48,7 +48,7 @@ const LoginPage = () => {
     <div className="min-h-[70vh]  my-36 flex items-center justify-center px-4">
       <Form
         className="flex w-full max-w-md flex-col gap-5 rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
-        onSubmit={handleRegister}
+        onSubmit={handleLogin}
       >
         <div className="mb-2 text-center">
           <h2 className="text-3xl font-bold text-gray-800">Login Account</h2>
@@ -88,18 +88,6 @@ const LoginPage = () => {
           validate={(value) => {
             if (!value) {
               return "Password is required";
-            }
-
-            if (value.length < 8) {
-              return "Password must be at least 6 characters";
-            }
-
-            if (!/[A-Z]/.test(value)) {
-              return "Password must contain at least one uppercase letter";
-            }
-
-            if (!/[a-z]/.test(value)) {
-              return "Password must contain at least one lowercase letter";
             }
 
             return null;

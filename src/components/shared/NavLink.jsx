@@ -1,10 +1,14 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-const NavLink = ({ href, children }) => {
+const NavLink = ({ href, children,className }) => {
   const pathname = usePathname();
   return (
-    <Link className={`${pathname === href ? "text-blue-400 font-bold border-b-2 border-blue-400" : ""}text-white `} href={href}>
+    <Link
+      className={`${pathname === href ? "bg-red-400 text-white" : ""} ${className}`}
+      href={href}
+    >
       {children}
     </Link>
   );

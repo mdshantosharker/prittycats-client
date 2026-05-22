@@ -49,7 +49,7 @@ const BannerPage = () => {
               </button>
             </Link>
 
-            <Link href="/about">
+            <Link href="/">
               <button
                 className="px-8 py-4 rounded-2xl bg-white border border-gray-200
                 text-gray-700 font-semibold shadow-sm hover:bg-gray-50

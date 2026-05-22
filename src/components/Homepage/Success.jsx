@@ -3,7 +3,7 @@ import React from "react";
 
 const SuccessStories = () => {
   return (
-    <section className="mt-10 px-6 py-20 bg-white">
+    <section className=" px-6 pb-20 bg-white">
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
           Success Stories ❤️

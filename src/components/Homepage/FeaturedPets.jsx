@@ -66,10 +66,12 @@ const FeaturedPets = async () => {
                   </button>
                 </Link>
 
-                <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:scale-[1.02] transition flex items-center justify-center gap-2">
-                  <FaPaw />
-                  Adopt
-                </button>
+                <Link href={`/pet-details/${pet._id}`} className="w-full">
+                  <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:scale-[1.02] transition flex items-center justify-center gap-2">
+                    <FaPaw />
+                    Adopt
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

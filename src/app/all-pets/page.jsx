@@ -28,8 +28,8 @@ const AllPetsPage = async () => {
           >
             <div className="h-64 relative overflow-hidden">
               <Image
-                src={pet.imageUrl}
-                alt={pet.name|"petName"}
+                src={pet?.imageUrl || "/default-pet.png"}
+                alt={pet?.name || "petName"}
                 fill
                 className="object-cover group-hover:scale-110 transition duration-500"
               />
@@ -82,10 +82,12 @@ const AllPetsPage = async () => {
                   </button>
                 </Link>
 
-                <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:scale-[1.02] transition flex items-center justify-center gap-2">
-                  <FaPaw />
-                  Adopt
-                </button>
+                <Link href={`/pet-details/${pet._id}`} className="w-full">
+                  <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:scale-[1.02] transition flex items-center justify-center gap-2">
+                    <FaPaw />
+                    Adopt
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

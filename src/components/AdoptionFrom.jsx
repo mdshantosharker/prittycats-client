@@ -58,6 +58,7 @@ const AdoptionFrom = ({ pet }) => {
         userId: user.id,
         userImage: user.image,
         userName: user.name,
+        ownerEmail: user?.email,
         petId: pet._id,
         name: pet.name,
         adoptionFee,
@@ -165,7 +166,7 @@ const AdoptionFrom = ({ pet }) => {
             type="text"
             value={pet.name}
             readOnly
-            className="w-full border rounded-xl px-4 py-3 bg-gray-100"
+            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
           />
         </div>
 
@@ -176,7 +177,7 @@ const AdoptionFrom = ({ pet }) => {
             type="text"
             value={user?.name || ""}
             readOnly
-            className="w-full border rounded-xl px-4 py-3 bg-gray-100"
+            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
           />
         </div>
 
@@ -187,12 +188,12 @@ const AdoptionFrom = ({ pet }) => {
             type="email"
             value={user?.email || ""}
             readOnly
-            className="w-full border rounded-xl px-4 py-3 bg-gray-100"
+            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
           />
         </div>
 
         <div>
-          <DateField onChange={setPicUpDate} className="w-full">
+          <DateField isRequired onChange={setPicUpDate} className="w-full">
             <Label>Pickup Date</Label>
 
             <DateField.Group>

@@ -15,7 +15,7 @@ const PetCareTips = () => {
       </div>
 
      
-      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+      <div className="lg:max-w-7xl w-11/12 mx-auto grid md:grid-cols-3 gap-10">
         
         
         <div className="group bg-white border border-gray-100 rounded-3xl p-10 text-center shadow-md hover:shadow-2xl transition duration-300">

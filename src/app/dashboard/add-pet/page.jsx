@@ -1,40 +1,64 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { ObjectId } from "bson";
+import { toast } from "react-toastify";
+
 const AddPetPage = () => {
+  const { data } = authClient.useSession();
+  const user = data?.user;
+  console.log(user);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const id = new ObjectId().toString();
+    try {
+      const id = new ObjectId().toString();
 
-    const petData = {
-      ...Object.fromEntries(new FormData(e.currentTarget)),
-      _id: id,
-      status: "pending",
-    };
+      const petData = {
+        ...Object.fromEntries(new FormData(e.currentTarget)),
+        ownerEmail: user?.email,
+        userName: user?.name,
+        _id: id,
+        status: "pending",
+      };
 
-    const pet = await fetch("http://localhost:5000/pets", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(petData),
-    }).then((res) => res.json());
+      const petRes = await fetch("http://localhost:5000/pets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(petData),
+      });
 
-    const adoptedData = {
-      ...petData,
-      petId: id,
-    };
+      if (!petRes.ok) {
+        throw new Error("Failed to add pet");
+      }
 
-    const adopted = await fetch("http://localhost:5000/adopted", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(adoptedData),
-    }).then((res) => res.json());
+      const pet = await petRes.json();
 
-    console.log({ pet, adopted });
+      const adoptedData = {
+        ...petData,
+        petId: id,
+      };
+
+      const adoptedRes = await fetch("http://localhost:5000/adopted", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(adoptedData),
+      });
+
+      if (!adoptedRes.ok) {
+        throw new Error("Failed to add adopted data");
+      }
+
+      const adopted = await adoptedRes.json();
+
+      toast.success("Successfully Pet Added");
+    } catch (error) {
+      toast.error(error.message || "Something went wrong");
+    }
   };
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-5">
@@ -51,6 +75,7 @@ const AddPetPage = () => {
             <label className="block mb-2 font-medium">Pet Name</label>
             <input
               type="text"
+              required
               placeholder="Enter pet name"
               name="name"
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
@@ -160,8 +185,8 @@ const AddPetPage = () => {
             <input
               type="email"
               name="ownerEmail"
-              // value={user?.email}
-              // readOnly
+              value={user?.email || ""}
+              readOnly
               className="w-full border rounded-lg px-4 py-3 bg-gray-100 cursor-not-allowed"
             />
           </div>
@@ -179,7 +204,7 @@ const AddPetPage = () => {
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
+              className="w-full cursor-pointer bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
             >
               Add Pet
             </button>

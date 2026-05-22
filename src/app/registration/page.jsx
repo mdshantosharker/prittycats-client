@@ -12,10 +12,13 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 const RegistrationPage = () => {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [isVisible2, setIsVisible2] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
@@ -35,10 +38,11 @@ const RegistrationPage = () => {
     console.log("DATA:", data);
     console.log("ERROR:", error);
     if (data) {
-      alert("signup successful");
+      toast.success("Signup Successful");
+      router.push("/");
     }
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -145,7 +149,7 @@ const RegistrationPage = () => {
             }
 
             if (value.length < 8) {
-              return "Password must be at least 6 characters";
+              return "Password must be at least 8 characters";
             }
 
             if (!/[A-Z]/.test(value)) {

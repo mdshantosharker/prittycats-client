@@ -67,8 +67,8 @@ const UpdatePage = () => {
             <label className="block mb-2 font-medium">Species</label>
             <select
               name="species"
-              required
-              defaultValue={pet?.species}
+              value={pet?.species}
+               onChange={(e) => setPet({ ...pet, species: e.target.value })}
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >
               <option value="">Select Species</option>
@@ -104,12 +104,13 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Gender</label>
             <select
-              defaultValue={pet?.gender || ""}
+              value={pet?.gender || ""}
+               onChange={(e) => setPet({ ...pet, gender: e.target.value })}
               name="gender"
               required
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >
-              <option>Select Gender</option>
+              <option  value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
@@ -140,8 +141,9 @@ const UpdatePage = () => {
           <div>
             <label className="block mb-2 font-medium">Vaccination Status</label>
             <select
-              defaultValue={pet?.vaccinationStatus}
+              value={pet?.vaccinationStatus}
               name="vaccinationStatus"
+              onChange={(e) => setPet({ ...pet, vaccinationStatus: e.target.value })}
               required
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >

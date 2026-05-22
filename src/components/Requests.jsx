@@ -1,12 +1,14 @@
 "use client";
 
 import { Button, Modal } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaUsers } from "react-icons/fa";
 
 const Requests = ({ petId }) => {
   const [adopted, setAdopted] = useState([]);
-
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const getData = async () => {
       const res = await fetch(`http://localhost:5000/adopted/${petId}`);
@@ -33,10 +35,20 @@ const Requests = ({ petId }) => {
   };
 
   return (
-    <Modal>
+    <Modal
+      open={open}
+      onOpenChange={(isOpen) => {
+        setOpen(isOpen);
+
+        if (!isOpen) {
+          router.push("/dashboard/my-listing");
+        }
+      }}
+    >
       <Button
+        onClick={() => setOpen(true)}
         variant="solid"
-        className="w-full bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl font-semibold"
+        className="w-full py-6 bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl font-semibold"
       >
         <FaUsers />
         Requests
@@ -67,13 +79,14 @@ const Requests = ({ petId }) => {
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div>
+                          <p className="text-gray-500 mt-1">
+                            {request.ownerEmail}
+                          </p>
                           <h3 className="text-xl font-bold text-gray-900">
                             {request.userName}
                           </h3>
 
-                          <p className="text-gray-500 mt-1">
-                            {request.userEmail}
-                          </p>
+                          
 
                           <p className="mt-3 text-sm text-gray-700">
                             <span className="font-semibold">Pickup Date:</span>{" "}
