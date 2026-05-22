@@ -31,7 +31,7 @@ const Navbar = () => {
   const isActive = (href) => pathname === href;
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-[85%] rounded-2xl backdrop-blur-xl bg-slate-900/30 border border-white/10 shadow-xl">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-[85%] rounded-2xl backdrop-blur-xl dark:bg-slate-700/60 bg-slate-900/30 border border-white/10 shadow-xl">
       <div className="flex items-center justify-between px-5 py-3 text-white">
         <Link href="/" className="text-xl font-bold tracking-wide">
           🐱 PrittyCats

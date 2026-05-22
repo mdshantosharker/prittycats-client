@@ -30,7 +30,7 @@ const steps = [
 
 const ExtraTwo = () => {
   return (
-    <div className="py-16 my-20 px-4 bg-linear-to-b from-pink-50 via-white to-orange-50">
+    <div className="py-16 mt-20 px-4 bg-linear-to-b from-pink-50 via-white to-orange-50">
      
       <div className="text-center mb-14">
         <h2 className="text-4xl font-extrabold text-gray-800">

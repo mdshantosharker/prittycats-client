@@ -13,10 +13,10 @@ const FeaturedPets = async () => {
   return (
     <section className="mt-20 ">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-extrabold text-gray-900">
+        <h1 className="text-4xl dark:text-white font-extrabold text-gray-900">
           Featured Pets 🐾
         </h1>
-        <p className="text-gray-500 mt-2">
+        <p className="text-gray-500 dark:text-white mt-2">
           Meet adorable pets waiting for a loving home
         </p>
       </div>
@@ -36,11 +36,11 @@ const FeaturedPets = async () => {
                 className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
               />
 
-              <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full text-xs font-semibold">
+              <div className="absolute dark:text-black  top-4 left-4 bg-white/90 px-3 py-1 rounded-full text-xs font-semibold">
                 {pet.species}
               </div>
 
-              <div className="absolute top-4 right-4 bg-black/80 text-white px-3 py-1 rounded-full text-xs">
+              <div className="absolute  top-4 right-4 bg-black/80 text-white px-3 py-1 rounded-full text-xs">
                 ${pet.adoptionFee}
               </div>
             </div>

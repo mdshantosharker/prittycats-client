@@ -61,7 +61,7 @@ const AddPetPage = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-5">
+    <div className="min-h-screen bg-gray-100 dark:text-black flex items-center justify-center p-5">
       <div className="w-full max-w-3xl bg-white shadow-lg rounded-2xl p-8">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Add Pet For Adoption

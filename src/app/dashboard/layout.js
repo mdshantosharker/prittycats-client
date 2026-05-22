@@ -3,7 +3,7 @@ import React from "react";
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-gray-100 mt-20 relative">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-gray-100 pt-20 relative">
       <div className="absolute top-0 left-0 w-full h-64 bg-linear-to-r from-pink-100/40 via-indigo-100/30 to-transparent blur-3xl -z-10" />
 
       <div className="container mx-auto px-4 sm:px-6 py-8">

@@ -128,7 +128,7 @@ const ListingSection = ({ pets = [] }) => {
                     <Requests petId={pet.petId} />
 
                     <Link href={`/pet-details/${pet.petId}`}>
-                      <button className="w-full py-3 rounded-2xl border border-gray-300 hover:bg-gray-100 flex items-center justify-center gap-2">
+                      <button className="w-full dark:bg-black py-3 rounded-2xl border border-gray-300 hover:bg-gray-100 flex items-center justify-center gap-2">
                         <FaEye /> View
                       </button>
                     </Link>

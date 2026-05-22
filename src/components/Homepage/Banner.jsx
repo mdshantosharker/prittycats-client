@@ -6,13 +6,13 @@ import Image from "next/image";
 
 const BannerPage = () => {
   return (
-    <section className="relative overflow-hidden bg-white min-h-screen flex items-center justify-center pt-36 py-20 px-6">
+    <section className="relative overflow-hidden  dark:bg-black min-h-screen flex items-center justify-center pt-36 py-20 px-6">
       <div className="absolute inset-0 -z-10">
-        <div className="absolute -top-30 -left-20 w-105 h-105 bg-pink-200/40 blur-[140px] rounded-full"></div>
+        <div className="absolute -top-30 -left-20 w-105 h-105  blur-[140px] rounded-full"></div>
 
-        <div className="absolute -bottom-30 -right-20 w-105 h-105 bg-indigo-200/40 blur-[140px] rounded-full"></div>
+        <div className="absolute -bottom-30 -right-20 w-105 h-105  blur-[140px] rounded-full"></div>
 
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 h-75 bg-purple-100/30 blur-[120px] rounded-full"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-75 h-75 blur-[120px] rounded-full"></div>
       </div>
 
       <div className=" w-full mx-auto grid lg:grid-cols-2 justify-between items-center">
@@ -24,7 +24,7 @@ const BannerPage = () => {
             🐾 Welcome to PrittyCats
           </div>
 
-          <h1 className="mt-8 text-5xl md:text-7xl font-black leading-tight text-gray-900">
+          <h1 className="mt-8 text-5xl md:text-7xl font-black leading-tight dark:text-white text-gray-900">
             Find Your
             <span className="block bg-linear-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
               Perfect Cat
@@ -60,23 +60,23 @@ const BannerPage = () => {
             </Link>
           </div>
 
-          <div className="mt-12 flex items-center justify-center lg:justify-start gap-8 flex-wrap">
-            <div>
-              <h3 className="text-3xl font-bold text-gray-900">500+</h3>
+          <div className="mt-12 dark:bg-gray  flex items-center justify-center lg:justify-start gap-8 flex-wrap">
+            <div >
+              <h3 className="text-3xl dark:text-white  font-bold text-gray-900">500+</h3>
               <p className="text-gray-500 text-sm">Cats Adopted</p>
             </div>
 
             <div className="w-px h-10 bg-gray-200"></div>
 
             <div>
-              <h3 className="text-3xl font-bold text-gray-900">100%</h3>
+              <h3 className="text-3xl dark:text-white font-bold text-gray-900">100%</h3>
               <p className="text-gray-500 text-sm">Happy Families</p>
             </div>
 
             <div className="w-px h-10 bg-gray-200"></div>
 
             <div>
-              <h3 className="text-3xl font-bold text-gray-900">24/7</h3>
+              <h3 className="text-3xl dark:text-white font-bold text-gray-900">24/7</h3>
               <p className="text-gray-500 text-sm">Support</p>
             </div>
           </div>
@@ -87,7 +87,7 @@ const BannerPage = () => {
 
           <div
             className="relative w-full max-w-130 bg-white/80 backdrop-blur-xl
-            border border-white shadow-2xl rounded-[40px]
+            border border-white  rounded-[40px]
             p-6 md:p-10"
           >
             <div className="w-full max-w-105 mx-auto">

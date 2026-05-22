@@ -3,7 +3,7 @@ import { ThemeProvider } from "next-themes";
 
 const NextThemeProvider = ({ children }) => {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark">
+    <ThemeProvider attribute="class" defaultTheme="light">
       {children}
     </ThemeProvider>
   );

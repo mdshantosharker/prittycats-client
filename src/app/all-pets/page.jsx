@@ -37,30 +37,56 @@ const AllPetsPage = () => {
   return (
     <section className="mt-24 px-6 py-10">
       <div className="text-center mb-14">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+        <h1 className="text-4xl dark:text-white md:text-5xl font-extrabold text-gray-900">
           All Pets 🐾
         </h1>
-        <p className="text-gray-500 mt-3">Find your perfect furry companion</p>
+        <p className="text-gray-500 dark:text-white mt-3">
+          Find your perfect furry companion
+        </p>
 
-        <div className="mt-8 flex flex-col md:flex-row gap-4 justify-center">
+        <div className="mt-8  flex flex-col md:flex-row gap-4 justify-center">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search pets by name..."
-            className="px-4 py-3 border rounded-xl w-full md:w-80"
+            className="px-4 py-3 border dark:bg-gray-800 rounded-xl w-full md:w-80"
           />
 
           <select
             value={species}
             onChange={(e) => setSpecies(e.target.value)}
-            className="px-4 py-3 border rounded-xl w-full md:w-60"
+            className="
+    px-4 py-3 border rounded-xl w-full md:w-60
+    bg-white text-black
+    dark:bg-gray-800 dark:text-white dark:border-gray-700
+  "
           >
             <option value="">All Species</option>
-            <option value="Dog">Dog</option>
-            <option value="Cat">Cat</option>
-            <option value="Bird">Bird</option>
-            <option value="Rabbit">Rabbit</option>
+            <option
+              className="bg-white text-black dark:bg-gray-800 dark:text-white"
+              value="Dog"
+            >
+              Dog
+            </option>
+            <option
+              className="bg-white text-black dark:bg-gray-800 dark:text-white"
+              value="Cat"
+            >
+              Cat
+            </option>
+            <option
+              className="bg-white text-black dark:bg-gray-800 dark:text-white"
+              value="Bird"
+            >
+              Bird
+            </option>
+            <option
+              className="bg-white text-black dark:bg-gray-800 dark:text-white"
+              value="Rabbit"
+            >
+              Rabbit
+            </option>
           </select>
         </div>
       </div>
