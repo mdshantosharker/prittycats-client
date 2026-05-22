@@ -37,11 +37,7 @@ const UpdatePage = () => {
       body: JSON.stringify(petData),
     });
     const pet = await res.json();
-    if (!res.ok) {
-     
-      toast.error(data.message || "Not allowed to update this pet");
-      return;
-    }
+
     toast.success("Update Successfully");
     console.log(pet);
     console.log("Sending update:", petData);

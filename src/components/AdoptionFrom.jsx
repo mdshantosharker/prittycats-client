@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { DateField, Label } from "@heroui/react";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const AdoptionFrom = ({ pet }) => {
@@ -26,8 +27,8 @@ const AdoptionFrom = ({ pet }) => {
 
   const { data } = authClient.useSession();
   const user = data?.user;
-
-  console.log(requestData);
+  console.log(pet);
+  console.log(user);
 
   useEffect(() => {
     const getRequest = async () => {
@@ -62,12 +63,18 @@ const AdoptionFrom = ({ pet }) => {
   const handleAdopted = async (e) => {
     e.preventDefault();
 
+    if (user?.email === pet?.ownerEmail) {
+      toast.error("Owner can not adopt pet");
+      return;
+    }
+
     try {
       const adoptedData = {
         userId: user.id,
         userImage: user.image,
         userName: user.name,
-        ownerEmail: user?.email,
+        userEmail: user.email,
+        ownerEmail: pet?.ownerEmail,
         petId: pet._id,
         name: pet.name,
         adoptionFee,
@@ -80,7 +87,7 @@ const AdoptionFrom = ({ pet }) => {
         breed,
         gender,
         healthStatus,
-        picUpDate: picUpDate,
+        picUpDate,
         status: "pending",
       };
 
@@ -93,6 +100,18 @@ const AdoptionFrom = ({ pet }) => {
       });
 
       const data = await res.json();
+
+      if (data.alreadyExists) {
+        setRequestData(data.data);
+
+        Swal.fire({
+          title: "Already Requested",
+          text: `Current Status: ${data.data.status}`,
+          icon: "info",
+        });
+
+        return;
+      }
 
       setRequestData({
         ...adoptedData,
@@ -109,7 +128,7 @@ const AdoptionFrom = ({ pet }) => {
 
       Swal.fire({
         title: "Error",
-        text: "This pet Already in Adopted List",
+        text: "Something went wrong",
         icon: "error",
       });
     }

@@ -12,14 +12,12 @@ const AddPetPage = () => {
     e.preventDefault();
 
     try {
-      const id = new ObjectId().toString();
+     const id = new ObjectId().toString();
 
       const petData = {
         ...Object.fromEntries(new FormData(e.currentTarget)),
         ownerEmail: user?.email,
-        userName: user?.name,
         _id: id,
-        status: "pending",
       };
 
       const petRes = await fetch("http://localhost:5000/pets", {

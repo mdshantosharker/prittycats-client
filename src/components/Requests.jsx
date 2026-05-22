@@ -15,7 +15,6 @@ const Requests = ({ petId }) => {
       const data = await res.json();
       setAdopted(data.adopted || data);
     };
-
     getData();
   }, [petId]);
 
@@ -80,7 +79,7 @@ const Requests = ({ petId }) => {
                       <div className="flex items-start justify-between gap-4">
                         <div>
                           <p className="text-gray-500 mt-1">
-                            {request.ownerEmail}
+                            {request.userName}
                           </p>
                           <h3 className="text-xl font-bold text-gray-900">
                             {request.userName}
