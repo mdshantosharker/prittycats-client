@@ -1,15 +1,38 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaEye, FaPaw } from "react-icons/fa";
+import { useRouter, useSearchParams } from "next/navigation";
 
-const AllPetsPage = async () => {
-  const res = await fetch("http://localhost:5000/pets", {
-    method: "GET",
-  });
+const AllPetsPage = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const pets = await res.json();
-  console.log(pets);
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const [species, setSpecies] = useState(searchParams.get("species") || "");
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    const query = new URLSearchParams();
+
+    if (search) query.append("search", search);
+    if (species) query.append("species", species);
+
+    fetch(`http://localhost:5000/pets?${query.toString()}`)
+      .then((res) => res.json())
+      .then((data) => setPets(data));
+  }, [search, species]);
+
+  useEffect(() => {
+    const query = new URLSearchParams();
+
+    if (search) query.append("search", search);
+    if (species) query.append("species", species);
+
+    router.replace(`/all-pets?${query.toString()}`);
+  }, [search, species]);
 
   return (
     <section className="mt-24 px-6 py-10">
@@ -18,6 +41,28 @@ const AllPetsPage = async () => {
           All Pets 🐾
         </h1>
         <p className="text-gray-500 mt-3">Find your perfect furry companion</p>
+
+        <div className="mt-8 flex flex-col md:flex-row gap-4 justify-center">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search pets by name..."
+            className="px-4 py-3 border rounded-xl w-full md:w-80"
+          />
+
+          <select
+            value={species}
+            onChange={(e) => setSpecies(e.target.value)}
+            className="px-4 py-3 border rounded-xl w-full md:w-60"
+          >
+            <option value="">All Species</option>
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+            <option value="Bird">Bird</option>
+            <option value="Rabbit">Rabbit</option>
+          </select>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
