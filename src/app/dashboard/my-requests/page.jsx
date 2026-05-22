@@ -12,13 +12,15 @@ const MyRequestsPage = () => {
 
   const { data } = authClient.useSession();
   const user = data?.user;
-
+  console.log(user);
   useEffect(() => {
     const getData = async () => {
       if (!user?.id) return;
 
       try {
-        const res = await fetch(`http://localhost:5000/adopted`);
+        const res = await fetch(
+          `http://localhost:5000/adopted?userId=${user?.id}`,
+        );
 
         const data = await res.json();
 
@@ -167,7 +169,13 @@ const MyRequestsPage = () => {
 
             <button
               onClick={() => handleCancel(request._id)}
-              className="w-full cursor-pointer bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition"
+              disabled={request.status !== "pending"}
+              className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold transition
+    ${
+      request.status === "pending"
+        ? "cursor-pointer bg-red-500 hover:bg-red-600 text-white"
+        : "cursor-not-allowed bg-gray-300 text-gray-600"
+    }`}
             >
               <FaTrash />
               Cancel

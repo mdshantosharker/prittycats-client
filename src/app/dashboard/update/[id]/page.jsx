@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const UpdatePage = () => {
   const { id } = useParams();
@@ -36,6 +37,12 @@ const UpdatePage = () => {
       body: JSON.stringify(petData),
     });
     const pet = await res.json();
+    if (!res.ok) {
+     
+      toast.error(data.message || "Not allowed to update this pet");
+      return;
+    }
+    toast.success("Update Successfully");
     console.log(pet);
     console.log("Sending update:", petData);
   };
@@ -55,8 +62,8 @@ const UpdatePage = () => {
             <label className="block mb-2 font-medium">Pet Name</label>
             <input
               type="text"
-              defaultValue={pet?.name
-}         required
+              defaultValue={pet?.name}
+              required
               placeholder="Enter pet name"
               name="name"
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
@@ -68,7 +75,7 @@ const UpdatePage = () => {
             <select
               name="species"
               value={pet?.species}
-               onChange={(e) => setPet({ ...pet, species: e.target.value })}
+              onChange={(e) => setPet({ ...pet, species: e.target.value })}
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >
               <option value="">Select Species</option>
@@ -105,12 +112,12 @@ const UpdatePage = () => {
             <label className="block mb-2 font-medium">Gender</label>
             <select
               value={pet?.gender || ""}
-               onChange={(e) => setPet({ ...pet, gender: e.target.value })}
+              onChange={(e) => setPet({ ...pet, gender: e.target.value })}
               name="gender"
               required
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >
-              <option  value="">Select Gender</option>
+              <option value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
@@ -143,7 +150,9 @@ const UpdatePage = () => {
             <select
               value={pet?.vaccinationStatus}
               name="vaccinationStatus"
-              onChange={(e) => setPet({ ...pet, vaccinationStatus: e.target.value })}
+              onChange={(e) =>
+                setPet({ ...pet, vaccinationStatus: e.target.value })
+              }
               required
               className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >

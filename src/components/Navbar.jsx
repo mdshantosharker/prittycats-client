@@ -3,15 +3,17 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button, Avatar } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const handleLogoOut = async () => {
     await authClient.signOut();
+    router.push("/");
     toast.success("Logged out successfully");
   };
 

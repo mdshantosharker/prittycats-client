@@ -12,8 +12,17 @@ const AdoptionFrom = ({ pet }) => {
   const [requestData, setRequestData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { adoptionFee, location, imageUrl, age, breed, gender, healthStatus } =
-    pet;
+  const {
+    adoptionFee,
+    vaccinationStatus,
+    location,
+    species,
+    imageUrl,
+    age,
+    breed,
+    gender,
+    healthStatus,
+  } = pet;
 
   const { data } = authClient.useSession();
   const user = data?.user;
@@ -66,6 +75,8 @@ const AdoptionFrom = ({ pet }) => {
         location,
         massage,
         age,
+        vaccinationStatus,
+        species,
         breed,
         gender,
         healthStatus,
@@ -98,7 +109,7 @@ const AdoptionFrom = ({ pet }) => {
 
       Swal.fire({
         title: "Error",
-        text: "Something went wrong",
+        text: "This pet Already in Adopted List",
         icon: "error",
       });
     }

@@ -6,10 +6,13 @@ const MyListing = async () => {
   const session = await auth.api.getSession({
     headers: await headers(), // you need to pass the headers object.
   });
-//   console.log(session);
-  const res = await fetch("http://localhost:5000/adopted", {
-    method: "GET",
-  });
+  //   console.log(session);
+  const res = await fetch(
+    `http://localhost:5000/adopted?userId=${session?.user?.id}`,
+    {
+      method: "GET",
+    },
+  );
   const pets = await res.json();
 
   return <ListingSection pets={pets} />;
