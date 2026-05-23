@@ -9,49 +9,23 @@ import Swal from "sweetalert2";
 const AdoptionFrom = ({ pet }) => {
   const [picUpDate, setPicUpDate] = useState(null);
   const [massage, setMassage] = useState("");
-
   const [requestData, setRequestData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const {
-    adoptionFee,
-    vaccinationStatus,
-    location,
-    species,
-    imageUrl,
-    age,
-    breed,
-    gender,
-    healthStatus,
-  } = pet;
-
   const { data } = authClient.useSession();
   const user = data?.user;
-  console.log(pet);
-  console.log(user);
 
   useEffect(() => {
     const getRequest = async () => {
       try {
-        if (!user?.id || !pet?._id) {
-          setLoading(false);
-          return;
-        }
-
+        if (!user?.id || !pet?._id) return;
         const res = await fetch(
           `http://localhost:5000/adopted/${pet._id}/${user.id}`,
         );
-
-        if (!res.ok) {
-          setLoading(false);
-          return;
-        }
-
         const data = await res.json();
-
         setRequestData(data || null);
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
       } finally {
         setLoading(false);
       }
@@ -68,187 +42,116 @@ const AdoptionFrom = ({ pet }) => {
       return;
     }
 
-    try {
-      const adoptedData = {
-        userId: user.id,
-        userImage: user.image,
-        userName: user.name,
-        userEmail: user.email,
-        ownerEmail: pet?.ownerEmail,
-        petId: pet._id,
-        name: pet.name,
-        adoptionFee,
-        imageUrl,
-        location,
-        massage,
-        age,
-        vaccinationStatus,
-        species,
-        breed,
-        gender,
-        healthStatus,
-        picUpDate,
-        status: "pending",
-      };
+    const adoptedData = {
+      userId: user.id,
+      userImage: user.image,
+      userName: user.name,
+      userEmail: user.email,
+      ownerEmail: pet?.ownerEmail,
+      petId: pet._id,
+      name: pet.name,
+      massage,
+      picUpDate,
+      status: "pending",
+    };
 
-      const res = await fetch("http://localhost:5000/adopted", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(adoptedData),
-      });
+    const res = await fetch("http://localhost:5000/adopted", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(adoptedData),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (data.alreadyExists) {
-        setRequestData(data.data);
-
-        Swal.fire({
-          title: "Already Requested",
-          text: `Current Status: ${data.data.status}`,
-          icon: "info",
-        });
-
-        return;
-      }
-
-      setRequestData({
-        ...adoptedData,
-        _id: data.insertedId,
-      });
-
-      Swal.fire({
-        title: "Request Submitted",
-        text: "Your adoption request has been sent to the owner",
-        icon: "success",
-      });
-    } catch (error) {
-      console.log(error);
-
-      Swal.fire({
-        title: "Error",
-        text: "Something went wrong",
-        icon: "error",
-      });
+    if (data.alreadyExists) {
+      setRequestData(data.data);
+      Swal.fire("Already Requested", `Status: ${data.data.status}`, "info");
+      return;
     }
+
+    setRequestData({ ...adoptedData, _id: data.insertedId });
+
+    Swal.fire("Success", "Request sent", "success");
   };
 
   if (loading) {
+    return <div className="bg-white p-6 rounded-3xl shadow">Loading...</div>;
+  }
+
+  if (pet?.adopted) {
     return (
-      <div className="bg-white rounded-3xl shadow-lg p-6 sticky top-10">
-        <p className="text-center font-semibold">Loading...</p>
+      <div className="bg-white p-8 rounded-3xl shadow text-center">
+        <h2 className="text-2xl font-bold text-red-600">
+          This pet is already adopted
+        </h2>
       </div>
     );
   }
 
   if (requestData) {
-    return (
-      <div className="bg-white rounded-3xl shadow-lg p-8 sticky top-10">
-        <div className="flex flex-col items-center text-center">
-          <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center text-5xl mb-6">
-            🐾
-          </div>
+    const status = requestData.status;
 
-          <h2 className="text-3xl font-black text-gray-900">Request Sent</h2>
-
-          <p className="text-gray-500 mt-3">
-            Your adoption request has been sent successfully.
-          </p>
-
-          <div className="mt-8 w-full bg-gray-50 rounded-2xl p-5 border">
-            <div className="flex items-center justify-between mb-4">
-              <span className="font-semibold text-gray-700">Pet Name</span>
-
-              <span className="font-bold">{requestData.name}</span>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <span className="font-semibold text-gray-700">Status</span>
-
-              <span
-                className={`px-4 py-2 rounded-full text-sm font-bold ${
-                  requestData.status === "approved"
-                    ? "bg-green-100 text-green-600"
-                    : requestData.status === "rejected"
-                      ? "bg-red-100 text-red-600"
-                      : "bg-yellow-100 text-yellow-600"
-                }`}
-              >
-                {requestData.status}
-              </span>
-            </div>
-          </div>
+    if (status === "pending") {
+      return (
+        <div className="bg-white p-8 rounded-3xl shadow text-center">
+          <h2 className="text-xl font-bold">Request Pending</h2>
+          <p className="mt-2 text-gray-500">Wait for owner response</p>
         </div>
-      </div>
-    );
+      );
+    }
+
+    if (status === "rejected") {
+      return (
+        <div className="bg-white p-8 rounded-3xl shadow text-center">
+          <h2 className="text-xl font-bold text-red-600">Request Rejected</h2>
+          <p className="mt-2 text-gray-500">
+            You cannot apply again for this pet
+          </p>
+        </div>
+      );
+    }
+
+    if (status === "approved") {
+      return (
+        <div className="bg-white p-8 rounded-3xl shadow text-center">
+          <h2 className="text-xl font-bold text-green-600">
+            Approved / Adopted
+          </h2>
+        </div>
+      );
+    }
   }
 
   return (
-    <div className="bg-white rounded-3xl shadow-lg p-6 h-fit sticky top-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">Adoption Form</h2>
+    <div className="bg-white p-6 rounded-3xl shadow">
+      <h2 className="text-2xl font-bold mb-4">Adoption Form</h2>
 
-      <form onSubmit={handleAdopted} className="space-y-5">
-        <div>
-          <label className="block mb-2 font-medium">Pet Name</label>
+      <form onSubmit={handleAdopted} className="space-y-4">
+        <input
+          value={pet.name}
+          readOnly
+          className="w-full p-3 border rounded-xl"
+        />
 
-          <input
-            type="text"
-            value={pet.name}
-            readOnly
-            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
-          />
-        </div>
+        <input
+          value={user?.name || ""}
+          readOnly
+          className="w-full p-3 border rounded-xl"
+        />
 
-        <div>
-          <label className="block mb-2 font-medium">User Name</label>
+        <input
+          value={user?.email || ""}
+          readOnly
+          className="w-full p-3 border rounded-xl"
+        />
 
-          <input
-            type="text"
-            value={user?.name || ""}
-            readOnly
-            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
-          />
-        </div>
+        <textarea
+          onChange={(e) => setMassage(e.target.value)}
+          placeholder="Message"
+          className="w-full p-3 border rounded-xl"
+        />
 
-        <div>
-          <label className="block mb-2 font-medium">User Email</label>
-
-          <input
-            type="email"
-            value={user?.email || ""}
-            readOnly
-            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
-          />
-        </div>
-
-        <div>
-          <DateField isRequired onChange={setPicUpDate} className="w-full">
-            <Label>Pickup Date</Label>
-
-            <DateField.Group>
-              <DateField.Input>
-                {(segment) => <DateField.Segment segment={segment} />}
-              </DateField.Input>
-            </DateField.Group>
-          </DateField>
-        </div>
-
-        <div>
-          <label className="block mb-2 font-medium">Message</label>
-
-          <textarea
-            onChange={(e) => setMassage(e.target.value)}
-            rows="5"
-            placeholder="Why do you want to adopt this pet?"
-            className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-black"
-          ></textarea>
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-black text-white py-4 rounded-xl text-lg font-semibold hover:bg-gray-800 transition"
-        >
+        <button className="w-full bg-black text-white py-3 rounded-xl">
           Adopt Now
         </button>
       </form>

@@ -12,16 +12,15 @@ const Requests = ({ petId }) => {
   useEffect(() => {
     const getData = async () => {
       const res = await fetch(`http://localhost:5000/adopted/${petId}`);
-
       const data = await res.json();
       setAdopted(data.adopted || data);
     };
     getData();
   }, [petId]);
 
-  console.log(petId);
+  // console.log(petId);
   const updateStatus = async (id, status) => {
-    const res = await fetch(`http://localhost:5000/adopted/${id}`, {
+    await fetch(`http://localhost:5000/adopted/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -29,10 +28,10 @@ const Requests = ({ petId }) => {
       body: JSON.stringify({ status }),
     });
 
-    const data = await res.json();
-    setAdopted((prev) =>
-      prev.map((item) => (item._id === id ? { ...item, status } : item)),
-    );
+    const updatedRes = await fetch(`http://localhost:5000/adopted/${petId}`);
+
+    const updatedData = await updatedRes.json();
+    setAdopted(updatedData);
   };
 
   return (
