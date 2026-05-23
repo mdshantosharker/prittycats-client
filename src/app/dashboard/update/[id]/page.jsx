@@ -15,7 +15,7 @@ const UpdatePage = () => {
 
   useEffect(() => {
     const getPet = async () => {
-      const res = await fetch(`http://localhost:5000/adopted-details/${id}`);
+      const res = await fetch(`http://localhost:5000/pets/${id}`);
       const data = await res.json();
       setPet(data);
     };

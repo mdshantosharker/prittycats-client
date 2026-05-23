@@ -34,24 +34,24 @@ const AddPetPage = () => {
 
       const pet = await petRes.json();
 
-      const adoptedData = {
-        ...petData,
-        petId: id,
-      };
+      // const adoptedData = {
+      //   ...petData,
+      //   petId: id,
+      // };
 
-      const adoptedRes = await fetch("http://localhost:5000/adopted", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(adoptedData),
-      });
+      // const adoptedRes = await fetch("http://localhost:5000/adopted", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(adoptedData),
+      // });
 
-      if (!adoptedRes.ok) {
-        throw new Error("Failed to add adopted data");
-      }
+      // if (!adoptedRes.ok) {
+      //   throw new Error("Failed to add adopted data");
+      // }
 
-      const adopted = await adoptedRes.json();
+      // const adopted = await adoptedRes.json();
 
       toast.success("Successfully Pet Added");
     } catch (error) {

@@ -9,7 +9,7 @@ const MyListing = async () => {
   console.log(session);
   //   console.log(session);
   const res = await fetch(
-    `http://localhost:5000/adopted?ownerEmail=${session?.user?.email}`,
+    `http://localhost:5000/pets?ownerEmail=${session?.user?.email}`,
     {
       method: "GET",
     },

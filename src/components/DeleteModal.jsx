@@ -11,7 +11,7 @@ const DeleteModal = ({ pet }) => {
   const handleDelete = async (id) => {
     console.log(id);
 
-    const res = await fetch(`http://localhost:5000/adopted/${id}`, {
+    const res = await fetch(`http://localhost:5000/pets/${id}`, {
       method: "DELETE",
     });
 
