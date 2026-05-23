@@ -2,6 +2,8 @@
 
 import { authClient } from "@/lib/auth-client";
 import { Check, Eye, EyeSlash } from "@gravity-ui/icons";
+import Lottie from "lottie-react";
+import animationData from "../../assets/registration.json";
 import {
   Button,
   FieldError,
@@ -53,13 +55,19 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="min-h-[70vh]  my-36 flex items-center justify-center px-4">
+    <div className="min-h-[70vh] flex-col  lg:flex-row   my-36 flex items-center justify-center px-4">
+      <div className="lg:w-2xl">
+        <Lottie animationData={animationData} loop={true} />
+      </div>
+
       <Form
-        className="flex w-full max-w-md flex-col gap-5 rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
+        className="flex w-full dark:bg-gray-800 dark:border-none max-w-md flex-col gap-5 rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
         onSubmit={handleRegister}
       >
         <div className="mb-2 text-center">
-          <h2 className="text-3xl font-bold text-gray-800">Create Account</h2>
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
+            Create Account
+          </h2>
 
           <p className="mt-1 text-gray-500">
             Welcome! Please enter your details
@@ -242,7 +250,7 @@ const RegistrationPage = () => {
 
         <Button
           type="submit"
-          className="h-12 rounded-xl bg-black font-semibold text-white transition-all hover:bg-gray-800"
+          className="h-12 dark:hover:bg-gray-600 dark:hover:text-white rounded-xl bg-black font-semibold text-white transition-all hover:bg-gray-800"
         >
           <Check className="mr-2 h-4 w-4" />
           Create Account
@@ -256,22 +264,22 @@ const RegistrationPage = () => {
           <div className="grow border-t border-gray-300"></div>
         </div>
 
-        <div className="text-center">
+        <div className="text-center ">
           <Button
             onClick={handleGoogle}
             variant="secondary"
-            className="h-12 rounded-xl border border-gray-300 bg-white hover:bg-gray-50"
+            className="h-12 rounded-xl dark:bg-transparent border border-gray-300 bg-white hover:bg-gray-50"
           >
             <FcGoogle size={25} />
             Sign up with Google
           </Button>
         </div>
 
-        <p className="text-center text-sm text-gray-500">
+        <p className="text-center  text-sm text-gray-500">
           Already have an account?{" "}
           <Link
             href="/login"
-            className="font-semibold text-black hover:underline"
+            className="font-semibold dark:text-white text-black hover:underline"
           >
             Login
           </Link>

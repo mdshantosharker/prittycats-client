@@ -2,6 +2,8 @@
 
 import { authClient } from "@/lib/auth-client";
 import { Eye, EyeSlash } from "@gravity-ui/icons";
+import Lottie from "lottie-react";
+import animationData from "../../assets/Login.json";
 import {
   Button,
   FieldError,
@@ -45,13 +47,19 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-[70vh]  my-36 flex items-center justify-center px-4">
+    <div className="min-h-[70vh] flex-col gap-10 lg:flex-row  my-36 flex items-center justify-center px-4">
+      <div>
+        {" "}
+        <Lottie animationData={animationData} loop={true} />
+      </div>
       <Form
-        className="flex w-full max-w-md flex-col gap-5 rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
+        className="flex w-full dark:bg-gray-800 dark:border-none max-w-md flex-col gap-5 rounded-3xl border border-gray-200 bg-white p-8 shadow-xl"
         onSubmit={handleLogin}
       >
         <div className="mb-2 text-center">
-          <h2 className="text-3xl font-bold text-gray-800">Login Account</h2>
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
+            Login Account
+          </h2>
 
           <p className="mt-1 text-gray-500">Welcome Back ! Your account</p>
         </div>
@@ -125,7 +133,7 @@ const LoginPage = () => {
 
         <Button
           type="submit"
-          className="h-12 w-full rounded-xl bg-black font-semibold text-white transition-all hover:bg-gray-800"
+          className="h-12 dark:hover:bg-gray-600 dark:hover:text-white w-full rounded-xl bg-black font-semibold text-white transition-all hover:bg-gray-800"
         >
           Login
         </Button>
@@ -142,7 +150,7 @@ const LoginPage = () => {
           <Button
             onClick={handleGoogle}
             variant="secondary"
-            className="h-12 rounded-xl border border-gray-300 bg-white hover:bg-gray-50"
+            className="h-12 rounded-xl dark:bg-transparent border border-gray-300 bg-white hover:bg-gray-50"
           >
             <FcGoogle size={25} />
             Sign up with Google
@@ -153,7 +161,7 @@ const LoginPage = () => {
           Don't have an account?
           <Link
             href="/registration"
-            className="font-semibold  text-black hover:underline"
+            className="font-semibold  dark:text-white text-black hover:underline"
           >
             Register
           </Link>

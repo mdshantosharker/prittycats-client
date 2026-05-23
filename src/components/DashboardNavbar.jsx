@@ -9,9 +9,16 @@ const DashboardNavbar = () => {
       <nav className="flex flex-col gap-3">
         <NavLink
           href={"/dashboard/my-requests"}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl 
-          text-gray-700 bg-gray-50 hover:bg-pink-50 hover:text-pink-600
-          transition font-medium"
+          className="
+    flex items-center gap-3 px-4 py-3 rounded-xl
+    bg-gray-50 text-gray-700
+    hover:bg-pink-50 hover:text-pink-600
+
+    dark:bg-gray-700 dark:text-white
+    dark:hover:bg-gray-600 dark:hover:text-pink-400
+
+    transition font-medium
+  "
         >
           <FaList />
           My Requests
@@ -19,9 +26,16 @@ const DashboardNavbar = () => {
 
         <NavLink
           href={"/dashboard/add-pet"}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl 
-          text-gray-700 bg-gray-50 hover:bg-indigo-50 hover:text-indigo-600
-          transition font-medium"
+          className="
+    flex items-center gap-3 px-4 py-3 rounded-xl
+    bg-gray-50 text-gray-700
+    hover:bg-indigo-50 hover:text-indigo-600
+
+    dark:bg-gray-700 dark:text-white
+    dark:hover:bg-gray-600 dark:hover:text-indigo-400
+
+    transition font-medium
+  "
         >
           <FaPlus />
           Add Pet
@@ -29,9 +43,16 @@ const DashboardNavbar = () => {
 
         <NavLink
           href={"/dashboard/my-listing"}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl 
-          text-gray-700 bg-gray-50 hover:bg-green-50 hover:text-green-600
-          transition font-medium"
+          className="
+    flex items-center gap-3 px-4 py-3 rounded-xl
+    bg-gray-50 text-gray-700
+    hover:bg-green-50 hover:text-green-600
+
+    dark:bg-gray-700 dark:text-white
+    dark:hover:bg-gray-600 dark:hover:text-green-400
+
+    transition font-medium
+  "
         >
           <FaPaw />
           My Listings

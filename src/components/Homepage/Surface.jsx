@@ -48,11 +48,11 @@ const items = [
 
 export function Surface() {
   return (
-    <div className="lg:max-w-7xl mt-10 w-11/12 mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
+    <div className="lg:max-w-7xl pt-20    w-11/12 mx-auto">
+      <h2 className="text-3xl font-bold dark:text-white text-center mb-10 text-gray-800">
         ❓ Frequently Asked Questions
       </h2>
-      <Accordion className="w-full" variant="surface">
+      <Accordion className="w-full dark:bg-gray-800" variant="surface">
         {items.map((item, index) => (
           <Accordion.Item key={index}>
             <Accordion.Heading>

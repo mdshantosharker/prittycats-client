@@ -3,9 +3,9 @@ import React from "react";
 
 const SuccessStories = () => {
   return (
-    <section className=" px-6  py-20 bg-white">
+    <section className=" px-6 dark:bg-black  py-20 bg-white">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+        <h2 className="text-4xl  dark:text-white md:text-5xl font-extrabold text-gray-900">
           Success Stories ❤️
         </h2>
         <p className="text-gray-500 mt-3 text-lg">
@@ -13,26 +13,26 @@ const SuccessStories = () => {
         </p>
       </div>
 
-      <div className="container mx-auto grid md:grid-cols-3 gap-10">
-        <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition">
+      <div className="container  mx-auto grid md:grid-cols-3 gap-10">
+        <div className="bg-gray-50 dark:bg-gray-800 dark:border-gray-700  rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition">
           <div className="flex items-center gap-4">
             <img
               src="https://i.pravatar.cc/100?img=5"
               className="w-14 h-14 rounded-full"
             />
             <div>
-              <h4 className="font-bold text-gray-900">Ayesha Rahman</h4>
-              <p className="text-sm text-gray-500">Dhaka</p>
+              <h4 className="font-bold text-gray-900 dark:text-white">Ayesha Rahman</h4>
+              <p className="text-sm text-gray-500 dark:text-white">Dhaka</p>
             </div>
           </div>
 
-          <p className="mt-5 text-gray-600 text-sm leading-relaxed">
+          <p className="mt-5 text-gray-600 text-sm dark:text-white leading-relaxed">
             “Adopting Luna changed my life. She brings joy every single day.
             Thank you PrittyCats!”
           </p>
         </div>
 
-        <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition">
+        <div className="bg-gray-50 dark:bg-gray-800 dark:border-gray-700 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition">
           <div className="flex items-center gap-4">
             <Image
               src="https://i.pravatar.cc/100?img=12"
@@ -42,30 +42,30 @@ const SuccessStories = () => {
               className="rounded-full"
             />
             <div>
-              <h4 className="font-bold text-gray-900">Tanvir Hasan</h4>
-              <p className="text-sm text-gray-500">Gazipur</p>
+              <h4 className="font-bold dark:text-white text-gray-900">Tanvir Hasan</h4>
+              <p className="text-sm text-gray-500 dark:text-white">Gazipur</p>
             </div>
           </div>
 
-          <p className="mt-5 text-gray-600 text-sm leading-relaxed">
+          <p className="mt-5 text-gray-600 dark:text-white text-sm leading-relaxed">
             “Max is not just a pet, he is part of my family now. Amazing
             adoption experience.”
           </p>
         </div>
 
-        <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition">
+        <div className="bg-gray-50 dark:bg-gray-800 dark:border-gray-700 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition">
           <div className="flex items-center gap-4">
             <img
               src="https://i.pravatar.cc/100?img=20"
               className="w-14 h-14 rounded-full"
             />
             <div>
-              <h4 className="font-bold text-gray-900">Nusrat Jahan</h4>
-              <p className="text-sm text-gray-500">Dhaka</p>
+              <h4 className="font-bold text-gray-900 dark:text-white">Nusrat Jahan</h4>
+              <p className="text-sm text-gray-500 dark:text-white">Dhaka</p>
             </div>
           </div>
 
-          <p className="mt-5 text-gray-600 text-sm leading-relaxed">
+          <p className="mt-5 text-gray-600 text-sm dark:text-white leading-relaxed">
             “Very smooth adoption process. My cat Simba is now my best friend
             ❤️”
           </p>

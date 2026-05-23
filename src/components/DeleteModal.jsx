@@ -28,7 +28,7 @@ const DeleteModal = ({ pet }) => {
     <AlertDialog>
       <Button
         className={
-          "py-6 rounded-2xl cursor-pointer bg-red-500 hover:bg-red-600 text-white font-semibold flex items-center justify-center gap-2 transition"
+          "py-6 rounded-2xl w-full cursor-pointer bg-red-500 hover:bg-red-600 text-white font-semibold flex items-center justify-center gap-2 transition"
         }
         variant="solid"
       >

@@ -75,14 +75,14 @@ const MyRequestsPage = () => {
   }
 
   return (
-    <section className="min-h-screen bg-gray-50 p-6">
+    <section className="min-h-screen dark:bg-transparent light:bg-gray-50 p-6">
       <div className="mb-8">
-        <h1 className="text-4xl font-black text-gray-900">My Requests</h1>
+        <h1 className="text-4xl font-black text-gray-900 dark:text-white">My Requests</h1>
 
-        <p className="text-gray-500 mt-2">Manage all your adoption requests</p>
+        <p className="text-gray-500 mt-2 dark:text-white">Manage all your adoption requests</p>
       </div>
 
-      <div className="hidden md:grid grid-cols-6 bg-black text-white rounded-2xl px-6 py-4 font-semibold mb-4">
+      <div className="hidden md:grid grid-cols-6 dark:bg-gray-700 bg-black text-white rounded-2xl px-6 py-4 font-semibold mb-4">
         <p>Pet Name</p>
         <p>Request Date</p>
         <p>Pickup Date</p>
@@ -106,81 +106,85 @@ const MyRequestsPage = () => {
       <div className="space-y-4">
         {adopted.map((request) => (
           <div
-            key={request._id}
-            className="grid grid-cols-1 md:grid-cols-6 items-center gap-4 bg-white border border-gray-200 rounded-2xl px-6 py-5 hover:shadow-md transition"
-          >
-            <div>
-              <p className="text-xs text-gray-400   md:hidden">Pet Name</p>
+  key={request._id}
+  className="grid grid-cols-1 md:grid-cols-6 items-center gap-6 bg-white dark:bg-gray-700 dark:border-none dark:text-white border border-gray-100 rounded-2xl p-6 hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
+>
+  {/* Pet Name */}
+  <div className="space-y-1">
+    <p className="text-xs font-medium tracking-wider text-gray-400 uppercase md:hidden">Pet Name</p>
+    <h2 className="font-bold  text-lg tracking-tight wrap-break-word whitespace-normal">
+      {request.name}
+    </h2>
+  </div>
 
-              <h2 className="font-bold wrap-break-word whitespace-normal  text-gray-900 text-lg">
-                {request.name}
-              </h2>
-            </div>
+  {/* Request Date */}
+  <div className="space-y-1">
+    <p className="text-xs font-medium tracking-wider text-gray-400 uppercase md:hidden">Request Date</p>
+    <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+      {new Date(parseInt(request._id.substring(0, 8), 16) * 1000).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      })}
+    </p>
+  </div>
 
-            <div>
-              <p className="text-xs text-gray-400 md:hidden">Request Date</p>
+  {/* Pickup Date */}
+  <div className="space-y-1">
+    <p className="text-xs font-medium tracking-wider text-gray-400 uppercase md:hidden">Pickup Date</p>
+    <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+      {request.picUpDate?.year && request.picUpDate?.month && request.picUpDate?.day
+        ? new Date(request.picUpDate.year, request.picUpDate.month - 1, request.picUpDate.day).toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          })
+        : "N/A"}
+    </p>
+  </div>
 
-              <p className="text-gray-700">
-                {new Date(
-                  parseInt(request._id.substring(0, 8), 16) * 1000,
-                ).toLocaleDateString()}
-              </p>
-            </div>
+  {/* Status */}
+  <div className="space-y-1">
+    <p className="text-xs font-medium tracking-wider text-gray-400 uppercase md:hidden">Status</p>
+    <span
+      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${
+        request.status === "approved"
+          ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800"
+          : request.status === "rejected"
+            ? "bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800"
+            : "bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800"
+      }`}
+    >
+      <span className={`w-1.5 h-1.5 rounded-full ${
+        request.status === "approved" ? "bg-emerald-500" : request.status === "rejected" ? "bg-rose-500" : "bg-amber-500"
+      }`} />
+      {request.status}
+    </span>
+  </div>
 
-            <div>
-              <p className="text-xs text-gray-400 md:hidden">Pickup Date</p>
+  {/* View Button */}
+  <Link href={`/pet-details/${request.petId}`} className="w-full">
+    <button className="w-full cursor-pointer bg-gray-900 hover:bg-black dark:bg-gray-800 dark:hover:bg-gray-600 text-white py-2.5 px-4 rounded-xl font-medium text-sm flex items-center justify-center gap-2 shadow-sm hover:shadow transition-all active:scale-95">
+      <FaEye className="text-base opacity-80" />
+      View Details
+    </button>
+  </Link>
 
-              <p className="text-gray-700 ">
-                {request.picUpDate &&
-                request.picUpDate.year &&
-                request.picUpDate.month &&
-                request.picUpDate.day
-                  ? new Date(
-                      request.picUpDate.year,
-                      request.picUpDate.month - 1,
-                      request.picUpDate.day,
-                    ).toLocaleDateString()
-                  : "N/A"}
-              </p>
-            </div>
-
-            <div>
-              <p className="text-xs text-gray-400 md:hidden">Status</p>
-
-              <span
-                className={`px-4 py-2 rounded-full text-sm font-semibold ${
-                  request.status === "approved"
-                    ? "bg-green-100 text-green-600"
-                    : request.status === "rejected"
-                      ? "bg-red-100 text-red-600"
-                      : "bg-yellow-100 text-yellow-600"
-                }`}
-              >
-                {request.status}
-              </span>
-            </div>
-
-            <Link href={`/pet-details/${request.petId}`}>
-              <button className="w-full cursor-pointer bg-black hover:bg-gray-800 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition">
-                <FaEye />
-                View
-              </button>
-            </Link>
-
-            <button
-              onClick={() => handleCancel(request._id)}
-              disabled={request.status !== "pending"}
-              className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold transition
-    ${
-      request.status === "pending"
-        ? "cursor-pointer bg-red-500 hover:bg-red-600 text-white"
-        : "cursor-not-allowed bg-gray-300 text-gray-600"
-    }`}
-            >
-              <FaTrash />
-              Cancel
-            </button>
-          </div>
+  {/* Cancel Button */}
+  <button
+    onClick={() => handleCancel(request._id)}
+    disabled={request.status !== "pending"}
+    className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-medium text-sm transition-all active:scale-95
+      ${
+        request.status === "pending"
+          ? "cursor-pointer bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 dark:bg-transparent dark:border-rose-500/30 dark:text-rose-400 dark:hover:bg-rose-500/10"
+          : "cursor-not-allowed bg-gray-50 text-gray-400 border border-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-500"
+      }`}
+  >
+    <FaTrash className="text-xs opacity-80" />
+    Cancel
+  </button>
+</div>
         ))}
       </div>
     </section>

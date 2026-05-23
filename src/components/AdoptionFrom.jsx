@@ -272,69 +272,82 @@ const AdoptionFrom = ({ pet }) => {
   }
 
   return (
-    <div className="bg-white p-6 rounded-3xl shadow">
-      <h2 className="text-2xl font-bold mb-4">Adoption Form</h2>
+    <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-3xl shadow-md border border-slate-100 transition-all duration-300 hover:shadow-lg">
+      <h2 className="text-2xl dark:text-white font-black text-slate-900 mb-6 tracking-tight pb-3 border-b border-slate-100">
+        Adoption Form
+      </h2>
 
-      <form onSubmit={handleAdopted} className="space-y-5">
+      <form onSubmit={handleAdopted} className="space-y-6 ">
         <div>
-          <label className="block mb-2 font-medium">Pet Name</label>
-
+          <label className="block mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+            Pet Name
+          </label>
           <input
             type="text"
             value={pet.name}
             readOnly
-            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
+            className="w-full border border-slate-200 rounded-2xl px-4 py-3.5 bg-slate-50 text-slate-500 font-medium cursor-not-allowed select-none outline-none"
           />
         </div>
 
         <div>
-          <label className="block mb-2 font-medium">User Name</label>
-
+          <label className="block mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+            User Name
+          </label>
           <input
             type="text"
             value={user?.name || ""}
             readOnly
-            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
+            className="w-full border border-slate-200 rounded-2xl px-4 py-3.5 bg-slate-50 text-slate-500 font-medium cursor-not-allowed select-none outline-none"
           />
         </div>
 
         <div>
-          <label className="block mb-2 font-medium">User Email</label>
-
+          <label className="block mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+            User Email
+          </label>
           <input
             type="email"
             value={user?.email || ""}
             readOnly
-            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
+            className="w-full border border-slate-200 rounded-2xl px-4 py-3.5 bg-slate-50 text-slate-500 font-medium cursor-not-allowed select-none outline-none"
           />
         </div>
 
-        <div>
+        <div className="relative">
           <DateField isRequired onChange={setPicUpDate} className="w-full">
-            <Label>Pickup Date</Label>
+            <Label className="block mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+              Pickup Date
+            </Label>
 
-            <DateField.Group>
-              <DateField.Input>
-                {(segment) => <DateField.Segment segment={segment} />}
+            <DateField.Group className="w-full flex border border-slate-200 rounded-2xl px-4 py-3.5 bg-white focus-within:ring-2 focus-within:ring-slate-900 focus-within:border-slate-900 transition-all duration-200">
+              <DateField.Input className="w-full flex gap-1 outline-none text-slate-800 font-medium">
+                {(segment) => (
+                  <DateField.Segment
+                    segment={segment}
+                    className="focus:bg-slate-200 rounded px-0.5 outline-none"
+                  />
+                )}
               </DateField.Input>
             </DateField.Group>
           </DateField>
         </div>
 
         <div>
-          <label className="block mb-2 font-medium">Message</label>
-
+          <label className="block mb-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+            Message
+          </label>
           <textarea
             onChange={(e) => setMassage(e.target.value)}
             rows="5"
             placeholder="Why do you want to adopt this pet?"
-            className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+            className="w-full border border-slate-200 rounded-2xl px-4 py-3.5 text-slate-800 placeholder-slate-400 font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 resize-none"
           ></textarea>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-black text-white py-4 rounded-xl text-lg font-semibold hover:bg-gray-800 transition"
+          className="w-full dark:bg-white dark:text-black bg-slate-900 text-white py-4 rounded-2xl text-base font-bold shadow-sm transition-all duration-300 hover:bg-slate-800 hover:shadow-md active:scale-[0.98] cursor-pointer dark:hover:bg-gray-700 dark:hover:text-white"
         >
           Adopt Now
         </button>

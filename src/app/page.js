@@ -13,7 +13,7 @@ export default function Home() {
         <BannerPage />
         <FeaturedPets />
       </div>
-      <div className="bg-linear-to-b from-white to-gray-100 ">
+      <div>
         <WhyAdopt />
         <PetCareTips />
         <Surface/>

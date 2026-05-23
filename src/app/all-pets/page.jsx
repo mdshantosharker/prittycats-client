@@ -35,7 +35,7 @@ const AllPetsPage = () => {
   }, [search, species]);
 
   return (
-    <section className="mt-24 px-6 py-10">
+    <section className="bg-gray-50 dark:bg-black  pt-32 px-6 py-10">
       <div className="text-center mb-14">
         <h1 className="text-4xl dark:text-white md:text-5xl font-extrabold text-gray-900">
           All Pets 🐾
@@ -58,7 +58,7 @@ const AllPetsPage = () => {
             onChange={(e) => setSpecies(e.target.value)}
             className="
     px-4 py-3 border rounded-xl w-full md:w-60
-    bg-white text-black
+    text-black
     dark:bg-gray-800 dark:text-white dark:border-gray-700
   "
           >
@@ -95,66 +95,73 @@ const AllPetsPage = () => {
         {pets.map((pet) => (
           <div
             key={pet._id}
-            className="group bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition duration-300"
+            className="group relative bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden"
           >
-            <div className="h-64 relative overflow-hidden">
+            <div className="relative h-72 overflow-hidden">
               <Image
                 src={pet?.imageUrl || "/default-pet.png"}
-                alt={pet?.name || "petName"}
+                alt={pet?.name || "pet"}
                 fill
-                className="object-cover group-hover:scale-110 transition duration-500"
+                className="object-cover group-hover:scale-110 transition-transform duration-500"
               />
 
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold text-gray-700">
-                {pet.species}
-              </div>
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
 
-              <div className="absolute top-4 right-4 bg-black/80 text-white px-3 py-1 rounded-full text-xs">
-                ${pet.adoptionFee}
-              </div>
-            </div>
+              <div className="absolute top-4 left-4 flex gap-2">
+                <span className="px-3 py-1 text-xs font-semibold bg-white/90 dark:bg-gray-800/80 backdrop-blur rounded-full text-gray-700 dark:text-gray-200">
+                  {pet.species}
+                </span>
 
-            <div className="p-6 space-y-3">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-gray-900">{pet.name}</h2>
-
-                <span className="text-xs px-3 py-1 rounded-full bg-gray-100 text-gray-600">
+                <span className="px-3 py-1 text-xs font-semibold bg-emerald-500 text-white rounded-full">
                   {pet.gender}
                 </span>
               </div>
 
-              <p className="text-gray-600 text-sm">
-                <span className="font-semibold text-gray-900">Breed:</span>{" "}
-                {pet.breed}
-              </p>
-
-              <div className="flex justify-between text-sm text-gray-600">
-                <p>
-                  <span className="font-semibold text-gray-900">Age:</span>{" "}
-                  {pet.age}
-                </p>
-
-                <p>
-                  <span className="font-semibold text-gray-900">Health:</span>{" "}
-                  {pet.healthStatus}
-                </p>
+              <div className="absolute top-4 right-4">
+                <span className="px-3 py-1 text-xs font-bold bg-black/70 text-white rounded-full">
+                  ${pet.adoptionFee}
+                </span>
               </div>
 
-              <p className="text-sm text-gray-600">
-                <span className="font-semibold text-gray-900">Location:</span>{" "}
-                {pet.location}
-              </p>
+              <div className="absolute bottom-4 left-4">
+                <h2 className="text-white text-2xl font-bold drop-shadow-lg">
+                  {pet.name}
+                </h2>
+              </div>
+            </div>
 
-              <div className="pt-4 flex gap-3">
-                <Link href={`/pet-details/${pet._id}`} className="w-full">
-                  <button className="w-full py-3 rounded-xl border border-gray-300 text-gray-700 font-semibold hover:bg-gray-100 transition flex items-center justify-center gap-2">
+            <div className="p-6 space-y-4">
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                {[
+                  ["Breed", pet.breed],
+                  ["Age", pet.age],
+                  ["Health", pet.healthStatus],
+                  ["Location", pet.location],
+                ].map(([label, value], i) => (
+                  <div
+                    key={i}
+                    className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3"
+                  >
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {label}
+                    </p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">
+                      {value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <Link href={`/pet-details/${pet._id}`} className="w-1/2">
+                  <button className="w-full py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition flex items-center justify-center gap-2 cursor-pointer">
                     <FaEye />
-                    View Details
+                    Details
                   </button>
                 </Link>
 
-                <Link href={`/pet-details/${pet._id}`} className="w-full">
-                  <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:scale-[1.02] transition flex items-center justify-center gap-2">
+                <Link href={`/pet-details/${pet._id}`} className="w-1/2">
+                  <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:opacity-90 hover:scale-[1.02] transition flex items-center justify-center gap-2 cursor-pointer">
                     <FaPaw />
                     Adopt
                   </button>

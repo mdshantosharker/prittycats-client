@@ -59,15 +59,15 @@ const AddPetPage = () => {
     }
   };
   return (
-    <div className="min-h-screen bg-gray-100 dark:text-black flex items-center justify-center p-5">
-      <div className="w-full max-w-3xl bg-white shadow-lg rounded-2xl p-8">
-        <h1 className="text-3xl font-bold mb-6 text-center">
+    <div className="min-h-screen bg-gray-50 rounded-2xl dark:bg-transparent  flex items-center justify-center p-5">
+      <div className="w-full max-w-3xl dark:bg-gray-700/40 bg-white shadow-lg rounded-2xl p-8">
+        <h1 className="text-3xl dark:text-white font-bold mb-6 text-center">
           Add Pet For Adoption
         </h1>
 
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          className="grid grid-cols-1   md:grid-cols-2 gap-5"
         >
           <div>
             <label className="block mb-2 font-medium">Pet Name</label>
@@ -76,7 +76,7 @@ const AddPetPage = () => {
               required
               placeholder="Enter pet name"
               name="name"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full border dark:border-white rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             />
           </div>
 
@@ -84,7 +84,7 @@ const AddPetPage = () => {
             <label className="block mb-2 font-medium">Species</label>
             <select
               name="species"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full  dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >
               <option value="">Select Species</option>
               <option value="Dog">Dog</option>
@@ -100,7 +100,7 @@ const AddPetPage = () => {
               type="text"
               placeholder="Enter breed"
               name="breed"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             />
           </div>
 
@@ -110,7 +110,7 @@ const AddPetPage = () => {
               type="number"
               placeholder="Enter age"
               name="age"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             />
           </div>
 
@@ -118,7 +118,7 @@ const AddPetPage = () => {
             <label className="block mb-2 font-medium">Gender</label>
             <select
               name="gender"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
@@ -132,7 +132,7 @@ const AddPetPage = () => {
               type="text"
               placeholder="https://..."
               name="imageUrl"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             />
           </div>
 
@@ -142,7 +142,7 @@ const AddPetPage = () => {
               type="text"
               placeholder="Healthy / Sick"
               name="healthStatus"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             />
           </div>
 
@@ -150,7 +150,7 @@ const AddPetPage = () => {
             <label className="block mb-2 font-medium">Vaccination Status</label>
             <select
               name="vaccinationStatus"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             >
               <option value="">Select Status</option>
               <option value="Vaccinated">Vaccinated</option>
@@ -164,7 +164,7 @@ const AddPetPage = () => {
               type="text"
               placeholder="Enter location"
               name="location"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             />
           </div>
 
@@ -174,7 +174,7 @@ const AddPetPage = () => {
               type="number"
               placeholder="Enter fee"
               name="adoptionFee"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             />
           </div>
 
@@ -185,7 +185,7 @@ const AddPetPage = () => {
               name="ownerEmail"
               value={user?.email || ""}
               readOnly
-              className="w-full border rounded-lg px-4 py-3 bg-gray-100 cursor-not-allowed"
+              className="w-full dark:border-white border dark:bg-gray-700 rounded-lg px-4 py-3 bg-gray-100 cursor-not-allowed"
             />
           </div>
 
@@ -195,14 +195,14 @@ const AddPetPage = () => {
               rows="5"
               placeholder="Write pet details..."
               name="description"
-              className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+              className="w-full dark:border-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
             ></textarea>
           </div>
 
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="w-full cursor-pointer bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
+              className="w-full cursor-pointer bg-black text-white py-3 rounded-lg font-semibold hover:bg-green-300 transition hover:text-black"
             >
               Add Pet
             </button>

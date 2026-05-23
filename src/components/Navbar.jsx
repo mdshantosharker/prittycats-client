@@ -82,6 +82,8 @@ const Navbar = () => {
                   </div>
                 </div>
 
+            
+
                 {isProfileOpen && (
                   <div className="absolute right-0 top-12 w-44 bg-slate-900/90 border border-white/10 rounded-xl shadow-lg overflow-hidden">
                     <Link
@@ -91,7 +93,7 @@ const Navbar = () => {
                     >
                       Dashboard
                     </Link>
-
+                    
                     <button
                       onClick={() => {
                         setIsProfileOpen(false);
@@ -123,11 +125,13 @@ const Navbar = () => {
           )}
         </div>
 
+          
         <button
-          className="md:hidden text-white text-2xl"
+          className="md:hidden text-white flex gap-3 text-2xl"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMenuOpen ? "✕" : "☰"}
+          <div><ThemeToggle/></div>
+          {isMenuOpen ? "✕" :  "☰"}
         </button>
       </div>
 

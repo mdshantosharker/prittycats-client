@@ -30,10 +30,10 @@ const steps = [
 
 const ExtraTwo = () => {
   return (
-    <div className="py-16 mt-20 px-4 bg-linear-to-b from-pink-50 via-white to-orange-50">
+    <div className="py-16 mt-20  bg-linear-to-b from-pink-50 via-white to-orange-50   px-4 dark:bg-none dark:bg-black">
      
-      <div className="text-center mb-14">
-        <h2 className="text-4xl font-extrabold text-gray-800">
+      <div className="text-center mb-14 ">
+        <h2 className="text-4xl dark:text-white font-extrabold text-gray-800">
           🐾 Adoption Journey
         </h2>
         <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
@@ -43,11 +43,11 @@ const ExtraTwo = () => {
       </div>
 
       
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-6 ">
         {steps.map((step, index) => (
           <div
             key={index}
-            className="group bg-white/80 backdrop-blur-md border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 hover:-translate-y-1"
+            className="group dark:bg-gray-800 dark:border-gray-700  bg-white/80 backdrop-blur-md border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 hover:-translate-y-1"
           >
             <div className="flex items-start gap-4">
               <div className="text-3xl bg-pink-100 w-12 h-12 flex items-center justify-center rounded-xl">
@@ -55,10 +55,10 @@ const ExtraTwo = () => {
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-gray-800 group-hover:text-pink-600 transition">
+                <h3 className="text-xl dark:text-white font-semibold text-gray-800 group-hover:text-pink-600 transition">
                   {step.title}
                 </h3>
-                <p className="text-gray-600 mt-2 leading-relaxed">
+                <p className="text-gray-600 dark:text-white mt-2 leading-relaxed">
                   {step.desc}
                 </p>
               </div>
@@ -68,12 +68,12 @@ const ExtraTwo = () => {
       </div>
 
       
-      <div className="max-w-4xl mx-auto mt-16 text-center">
-        <div className="bg-white rounded-2xl shadow-md p-8 border">
-          <h3 className="text-2xl font-bold text-gray-800 mb-3">
+      <div className="max-w-4xl  mx-auto mt-16 text-center ">
+        <div className="bg-white dark:bg-gray-800 dark:border-gray-700 rounded-2xl shadow-md p-8 border">
+          <h3 className="text-2xl dark:text-white font-bold text-gray-800 mb-3">
             💡 Why Adopt From Us?
           </h3>
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-gray-600 dark:text-white leading-relaxed">
             We ensure every pet is vaccinated, health-checked, and ready for a
             safe home. Our adoption process is simple, transparent, and focused
             on matching the right pet with the right family.
