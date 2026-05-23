@@ -50,14 +50,14 @@ const ListingSection = ({ pets = [] }) => {
             <div className="bg-emerald-500 rounded-3xl p-6 text-white shadow-lg">
               <p className="text-sm opacity-90">Available Pets</p>
               <h2 className="text-4xl font-black mt-2">
-                {pets.filter((p) => p.status === "pending" || !p.status).length}
+                {pets.filter((p) => p.adopted === false).length}
               </h2>
             </div>
 
             <div className="bg-pink-500 rounded-3xl p-6 text-white shadow-lg">
               <p className="text-sm opacity-90">Adopted Pets</p>
               <h2 className="text-4xl font-black mt-2">
-                {pets.filter((p) => p.status === "approved").length}
+                {pets.filter((p) => p.adopted === true).length}
               </h2>
             </div>
           </div>
@@ -89,18 +89,6 @@ const ListingSection = ({ pets = [] }) => {
                       </h2>
                       <p className="text-sm text-gray-500 mt-1">{pet.breed}</p>
                     </div>
-
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-bold ${
-                        pet.status === "approved"
-                          ? "bg-emerald-100 text-emerald-600"
-                          : pet.status === "rejected"
-                            ? "bg-red-100 text-red-600"
-                            : "bg-amber-100 text-amber-600"
-                      }`}
-                    >
-                      {pet.status || "pending"}
-                    </span>
                   </div>
 
                   <div className="space-y-2 text-sm text-gray-600 mb-6">

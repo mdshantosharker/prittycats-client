@@ -110,9 +110,9 @@ const MyRequestsPage = () => {
             className="grid grid-cols-1 md:grid-cols-6 items-center gap-4 bg-white border border-gray-200 rounded-2xl px-6 py-5 hover:shadow-md transition"
           >
             <div>
-              <p className="text-xs text-gray-400 md:hidden">Pet Name</p>
+              <p className="text-xs text-gray-400   md:hidden">Pet Name</p>
 
-              <h2 className="font-bold text-gray-900 text-lg">
+              <h2 className="font-bold wrap-break-word whitespace-normal  text-gray-900 text-lg">
                 {request.name}
               </h2>
             </div>
@@ -130,7 +130,7 @@ const MyRequestsPage = () => {
             <div>
               <p className="text-xs text-gray-400 md:hidden">Pickup Date</p>
 
-              <p className="text-gray-700">
+              <p className="text-gray-700 ">
                 {request.picUpDate &&
                 request.picUpDate.year &&
                 request.picUpDate.month &&

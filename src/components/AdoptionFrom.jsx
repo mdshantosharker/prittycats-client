@@ -80,10 +80,49 @@ const AdoptionFrom = ({ pet }) => {
 
   if (pet?.adopted) {
     return (
-      <div className="bg-white p-8 rounded-3xl shadow text-center">
-        <h2 className="text-2xl font-bold text-red-600">
-          This pet is already adopted
+      <div className="max-w-sm mx-auto lg:h-[40%] rounded-3xl border border-emerald-100 bg-linear-to-br from-white to-emerald-50 shadow-lg p-6 text-center relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1.5 bg-linear-to-r from-emerald-400 via-green-500 to-teal-400"></div>
+
+        <div className="flex justify-center mb-4 mt-2">
+          <div className="relative">
+            <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-emerald-100 to-green-100 flex items-center justify-center shadow-inner">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-8 h-8 text-emerald-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+
+            <span className="absolute -top-1 -right-1 flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
+          </div>
+        </div>
+
+        <h2 className="text-xl font-extrabold text-emerald-600">
+          Pet Already Adopted
         </h2>
+
+        <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+          This lovely pet has already found a new home 🐾
+        </p>
+
+        <div className="mt-5">
+          <span className="inline-flex items-center gap-2 bg-white border border-emerald-100 text-emerald-600 px-4 py-2 rounded-full text-xs font-semibold shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Adoption Completed
+          </span>
+        </div>
       </div>
     );
   }
@@ -93,65 +132,210 @@ const AdoptionFrom = ({ pet }) => {
 
     if (status === "pending") {
       return (
-        <div className="bg-white p-8 rounded-3xl shadow text-center">
-          <h2 className="text-xl font-bold">Request Pending</h2>
-          <p className="mt-2 text-gray-500">Wait for owner response</p>
+        <div className="w-full lg:h-[40%] bg-linear-to-br  from-orange-50 to-pink-50 border border-orange-100 p-8 rounded-3xl shadow-lg text-center max-w-md mx-auto">
+          <div className="flex justify-center mb-5">
+            <div className="relative">
+              <div className="w-20 h-20 rounded-full bg-orange-100 flex items-center justify-center shadow-inner">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-10 h-10 text-orange-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></span>
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full"></span>
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-bold text-gray-800">Request Pending</h2>
+
+          <p className="mt-3 text-gray-500 leading-relaxed">
+            Your adoption request has been sent successfully 🐾
+            <br />
+            Please wait for the pet owner’s response.
+          </p>
+
+          <div className="mt-6">
+            <span className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-medium">
+              <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+              Waiting for approval
+            </span>
+          </div>
         </div>
       );
     }
 
     if (status === "rejected") {
       return (
-        <div className="bg-white p-8 rounded-3xl shadow text-center">
-          <h2 className="text-xl font-bold text-red-600">Request Rejected</h2>
-          <p className="mt-2 text-gray-500">
-            You cannot apply again for this pet
+        <div className="lg:h-[40%] w-full flex flex-col items-center justify-center max-w-xl bg-linear-to-br from-red-50 to-pink-50 border border-red-100 p-5 rounded-2xl shadow-md text-center mx-auto">
+          <div className="flex justify-center mb-3">
+            <div className="relative">
+              <div className="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center shadow-inner">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-7 h-7 text-red-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </div>
+
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-400 rounded-full animate-pulse"></span>
+            </div>
+          </div>
+
+          <h2 className="text-3xl font-bold text-red-600">Request Rejected</h2>
+
+          <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+            Your adoption request was not approved.
+            <br />
+            You cannot apply again for this pet 🐾
           </p>
+
+          <div className="mt-4">
+            <span className="inline-flex items-center gap-2 bg-red-100 text-red-600 px-3 py-1.5 rounded-full text-xs font-medium">
+              <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+              Application closed
+            </span>
+          </div>
         </div>
       );
     }
 
-    if (status === "approved") {
-      return (
-        <div className="bg-white p-8 rounded-3xl shadow text-center">
-          <h2 className="text-xl font-bold text-green-600">
-            Approved / Adopted
-          </h2>
-        </div>
-      );
-    }
+    // if (status === "approved") {
+    //   return (
+    //     <div className="lg:h-[40%] max-w-sm mx-auto rounded-3xl border border-red-100 bg-linear-to-br from-white to-red-50 shadow-lg p-6 text-center relative overflow-hidden">
+    //       <div className="absolute top-0 left-0 w-full h-1.5 bg-linear-to-r from-red-500 via-pink-500 to-rose-400"></div>
+
+    //       <div className="flex justify-center mb-4 mt-2">
+    //         <div className="relative">
+    //           <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-red-100 to-pink-100 flex items-center justify-center shadow-inner">
+    //             <svg
+    //               xmlns="http://www.w3.org/2000/svg"
+    //               className="w-8 h-8 text-red-500"
+    //               fill="none"
+    //               viewBox="0 0 24 24"
+    //               stroke="currentColor"
+    //               strokeWidth={2.5}
+    //             >
+    //               <path
+    //                 strokeLinecap="round"
+    //                 strokeLinejoin="round"
+    //                 d="M6 18L18 6M6 6l12 12"
+    //               />
+    //             </svg>
+    //           </div>
+
+    //           <span className="absolute -top-1 -right-1 flex h-3 w-3">
+    //             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+    //             <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+    //           </span>
+    //         </div>
+    //       </div>
+
+    //       <h2 className="text-xl font-extrabold text-red-600">
+    //         Request Rejected
+    //       </h2>
+
+    //       <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+    //         Unfortunately, your adoption request was not approved.
+    //         <br />
+    //         You cannot apply again for this pet 🐾
+    //       </p>
+
+    //       <div className="mt-5">
+    //         <span className="inline-flex items-center gap-2 bg-white border border-red-100 text-red-500 px-4 py-2 rounded-full text-xs font-semibold shadow-sm">
+    //           <span className="w-2 h-2 rounded-full bg-red-500"></span>
+    //           Application Closed
+    //         </span>
+    //       </div>
+    //     </div>
+    //   );
+    // }
   }
 
   return (
     <div className="bg-white p-6 rounded-3xl shadow">
       <h2 className="text-2xl font-bold mb-4">Adoption Form</h2>
 
-      <form onSubmit={handleAdopted} className="space-y-4">
-        <input
-          value={pet.name}
-          readOnly
-          className="w-full p-3 border rounded-xl"
-        />
+      <form onSubmit={handleAdopted} className="space-y-5">
+        <div>
+          <label className="block mb-2 font-medium">Pet Name</label>
 
-        <input
-          value={user?.name || ""}
-          readOnly
-          className="w-full p-3 border rounded-xl"
-        />
+          <input
+            type="text"
+            value={pet.name}
+            readOnly
+            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
+          />
+        </div>
 
-        <input
-          value={user?.email || ""}
-          readOnly
-          className="w-full p-3 border rounded-xl"
-        />
+        <div>
+          <label className="block mb-2 font-medium">User Name</label>
 
-        <textarea
-          onChange={(e) => setMassage(e.target.value)}
-          placeholder="Message"
-          className="w-full p-3 border rounded-xl"
-        />
+          <input
+            type="text"
+            value={user?.name || ""}
+            readOnly
+            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
+          />
+        </div>
 
-        <button className="w-full bg-black text-white py-3 rounded-xl">
+        <div>
+          <label className="block mb-2 font-medium">User Email</label>
+
+          <input
+            type="email"
+            value={user?.email || ""}
+            readOnly
+            className="w-full border rounded-xl px-4 py-3 bg-gray-100 cursor-not-allowed"
+          />
+        </div>
+
+        <div>
+          <DateField isRequired onChange={setPicUpDate} className="w-full">
+            <Label>Pickup Date</Label>
+
+            <DateField.Group>
+              <DateField.Input>
+                {(segment) => <DateField.Segment segment={segment} />}
+              </DateField.Input>
+            </DateField.Group>
+          </DateField>
+        </div>
+
+        <div>
+          <label className="block mb-2 font-medium">Message</label>
+
+          <textarea
+            onChange={(e) => setMassage(e.target.value)}
+            rows="5"
+            placeholder="Why do you want to adopt this pet?"
+            className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-black"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-black text-white py-4 rounded-xl text-lg font-semibold hover:bg-gray-800 transition"
+        >
           Adopt Now
         </button>
       </form>
