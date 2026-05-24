@@ -5,6 +5,9 @@ const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
   const res = await fetch(`http://localhost:5000/pets/${id}`, {
     method: "GET",
+    headers: {
+    authorization:"logged in"
+  },
   });
   const pet = await res.json();
 
