@@ -52,7 +52,7 @@ const FeaturedPets = () => {
         }}
         modules={[Autoplay, Pagination, Navigation]}
       >
-        {pets.slice(0, 6).map((pet) => (
+        {pets?.slice(0, 6).map((pet) => (
           <SwiperSlide key={pet._id}>
             <div className="group bg-white dark:bg-gray-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800/60 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full max-w-sm mx-auto">
               <div className="h-64 relative overflow-hidden shrink-0">

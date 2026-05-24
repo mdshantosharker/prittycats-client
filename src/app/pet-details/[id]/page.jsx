@@ -1,13 +1,20 @@
 import AdoptionFrom from "@/components/AdoptionFrom";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Image from "next/image";
 
 const PetDetailsPage = async ({ params }) => {
   const { id } = await params;
+
+  const {token} = await auth.api.getToken({
+    headers: await headers(),
+  });
+  console.log(token);
   const res = await fetch(`http://localhost:5000/pets/${id}`, {
     method: "GET",
     headers: {
-    authorization:"logged in"
-  },
+      authorization: `Bearer ${token}`,
+    },
   });
   const pet = await res.json();
 

@@ -10,7 +10,7 @@ const ListingSection = ({ pets = [] }) => {
   console.log(pets);
 
   return (
-    <section className="min-h-screen  dark:bg-transparent bg-gray-50 p-6">
+    <section className="min-h-screen  bg-gray-50 p-6">
       {isEmpty ? (
         <div className="min-h-[60vh] flex flex-col items-center justify-center text-center bg-white rounded-3xl border border-gray-100 shadow-sm p-10">
           <div className="text-6xl mb-4">🐾</div>
@@ -31,7 +31,7 @@ const ListingSection = ({ pets = [] }) => {
       ) : (
         <>
           <div className="mb-10">
-            <h1 className="text-4xl dark:text-white font-black text-gray-900">
+            <h1 className="text-4xl  font-black text-gray-900">
               My Listings 🐾
             </h1>
             <p className="text-gray-500 mt-2">
@@ -40,11 +40,9 @@ const ListingSection = ({ pets = [] }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div className="bg-white dark:bg-gray-700 dark:border-none rounded-3xl p-6 shadow-sm border border-gray-100">
-              <p className="text-gray-500 dark:text-white text-sm">
-                Total Listings
-              </p>
-              <h2 className="text-4xl dark:text-white font-black mt-2 text-gray-900">
+            <div className="bg-white  rounded-3xl p-6 shadow-sm border border-gray-100">
+              <p className="text-gray-500  text-sm">Total Listings</p>
+              <h2 className="text-4xl  font-black mt-2 text-gray-900">
                 {pets.length}
               </h2>
             </div>
@@ -68,7 +66,7 @@ const ListingSection = ({ pets = [] }) => {
             {pets.map((pet) => (
               <div
                 key={pet._id}
-                className="group bg-gray-100 dark:bg-gray-700 dark:border-none rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100 hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between"
+                className="group bg-gray-100  rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100 hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between"
               >
                 <div className="relative h-64 overflow-hidden m-3 rounded-[1.5rem] bg-gray-50">
                   <Image
@@ -126,7 +124,7 @@ const ListingSection = ({ pets = [] }) => {
                     <Requests petId={pet._id} />
 
                     <Link href={`/pet-details/${pet._id}`} className="w-full">
-                      <button className="w-full h-full cursor-pointer py-3 rounded-xl border border-gray-200 bg-white dark:text-black  font-semibold text-sm flex items-center justify-center gap-2 transition active:scale-95 shadow-sm">
+                      <button className="w-full h-full cursor-pointer py-3 rounded-xl border border-gray-200 bg-white  text-black font-semibold text-sm flex items-center justify-center gap-2 transition active:scale-95 shadow-sm">
                         <FaEye /> View
                       </button>
                     </Link>

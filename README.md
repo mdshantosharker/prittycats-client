@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🐾 Prittycats — Pet Adoption Platform
 
-## Getting Started
+<p align="center">
+  <img src="https://img.shields.io/badge/MERN-Full%20Stack-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Next.js-Frontend-black?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Express-Backend-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/MongoDB-Database-brightgreen?style=for-the-badge" />
+</p>
 
-First, run the development server:
+<p align="center">
+  <b>A modern full-stack Pet Adoption Platform built with MERN Stack 🚀</b>
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌐 Live Links
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- 🌍 Live Site: https://your-live-link.com  
+- 💻 Client Repo: https://github.com/your-username/prittycats-client  
+- 🧠 Server Repo: https://github.com/your-username/prittycats-server  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🎯 Project Overview
 
-To learn more about Next.js, take a look at the following resources:
+Prittycats is a full-stack pet adoption platform where users can browse pets, submit adoption requests, and manage their adoption activities.  
+Pet owners can add pets, manage listings, and handle adoption requests securely.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Features
 
-## Deploy on Vercel
+### 🐶 Users
+- Browse all available pets
+- View detailed pet profiles
+- Submit adoption requests
+- Track request status (Pending / Approved / Rejected)
+- Cancel adoption requests
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🏠 Pet Owners
+- Add new pets
+- Update pet information
+- Delete pets
+- Manage adoption requests
+- Approve / Reject requests
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🔐 Authentication
+- JWT authentication (HTTPOnly cookies)
+- Login / Registration system
+- Protected private routes
+- Persistent login on refresh
+
+---
+
+## 🧩 Pages & Modules
+
+- 🏠 Home (Hero + Featured Pets + Sections)
+- 🐾 All Pets (Search / Filter / Sort)
+- 📄 Pet Details (Adoption form)
+- ➕ Add Pet (Owner dashboard)
+- 🏡 My Listings (Owner dashboard)
+- 📬 My Requests (User dashboard)
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- Next.js
+- React.js
+- Tailwind CSS
+- Axios
+- React Hook Form
+- React Toastify
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- JWT Authentication
+- Cookie Parser
+- CORS
+- dotenv
+
+---
+
+## 📦 NPM Packages
+
+### Client

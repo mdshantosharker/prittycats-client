@@ -55,9 +55,15 @@ const AdoptionFrom = ({ pet }) => {
       status: "pending",
     };
 
+    const { data: tokenData } = await authClient.token();
+    console.log(tokenData);
+
     const res = await fetch("http://localhost:5000/adopted", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
+      },
       body: JSON.stringify(adoptedData),
     });
 

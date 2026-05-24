@@ -14,8 +14,8 @@ const DashboardNavbar = () => {
     bg-gray-50 text-gray-700
     hover:bg-pink-50 hover:text-pink-600
 
-    dark:bg-gray-700 dark:text-white
-    dark:hover:bg-gray-600 dark:hover:text-pink-400
+  
+   
 
     transition font-medium
   "
@@ -31,8 +31,8 @@ const DashboardNavbar = () => {
     bg-gray-50 text-gray-700
     hover:bg-indigo-50 hover:text-indigo-600
 
-    dark:bg-gray-700 dark:text-white
-    dark:hover:bg-gray-600 dark:hover:text-indigo-400
+   
+   
 
     transition font-medium
   "
@@ -48,8 +48,7 @@ const DashboardNavbar = () => {
     bg-gray-50 text-gray-700
     hover:bg-green-50 hover:text-green-600
 
-    dark:bg-gray-700 dark:text-white
-    dark:hover:bg-gray-600 dark:hover:text-green-400
+   
 
     transition font-medium
   "
