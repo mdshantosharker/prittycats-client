@@ -14,6 +14,7 @@ const AllPetsPage = () => {
   const [species, setSpecies] = useState(searchParams.get("species") || "");
   const [pets, setPets] = useState([]);
 
+  console.log(pets);
   useEffect(() => {
     const query = new URLSearchParams();
 
@@ -112,16 +113,28 @@ const AllPetsPage = () => {
                   {pet.species}
                 </span>
 
-                <span className="px-3 py-1 text-xs font-semibold bg-emerald-500 text-white rounded-full">
-                  {pet.gender}
-                </span>
-              </div>
-
-              <div className="absolute top-4 right-4">
                 <span className="px-3 py-1 text-xs font-bold bg-black/70 text-white rounded-full">
                   ${pet.adoptionFee}
                 </span>
               </div>
+
+              {pet.adoptionStatus ? (
+                <>
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1 text-xs font-semibold bg-red-500 text-white rounded-full">
+                      Adopted
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1 text-xs font-semibold bg-emerald-500 text-white rounded-full">
+                      Available
+                    </span>
+                  </div>
+                </>
+              )}
 
               <div className="absolute bottom-4 left-4">
                 <h2 className="text-white text-2xl font-bold drop-shadow-lg">
@@ -160,12 +173,22 @@ const AllPetsPage = () => {
                   </button>
                 </Link>
 
-                <Link href={`/pet-details/${pet._id}`} className="w-1/2">
-                  <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:opacity-90 hover:scale-[1.02] transition flex items-center justify-center gap-2 cursor-pointer">
+                {pet.adoptionStatus === "closed" ? (
+                  <button
+                    disabled
+                    className="w-1/2 py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold opacity-50 cursor-not-allowed flex items-center justify-center gap-2"
+                  >
                     <FaPaw />
-                    Adopt
+                    Adopted
                   </button>
-                </Link>
+                ) : (
+                  <Link href={`/pet-details/${pet._id}`} className="w-1/2">
+                    <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:opacity-90 hover:scale-[1.02] transition flex items-center justify-center gap-2 cursor-pointer">
+                      <FaPaw />
+                      Adopt
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

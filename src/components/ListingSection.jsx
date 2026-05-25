@@ -76,6 +76,23 @@ const ListingSection = ({ pets = [] }) => {
                     className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
 
+                  {pet.adoptionStatus ? (
+                    <>
+                      <div className="relative top-4 left-4">
+                        <span className="px-3 py-1 text-xs font-semibold bg-red-500 text-white rounded-full">
+                          Adopted
+                        </span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="relative top-4 left-4">
+                        <span className="px-3 py-1 text-xs font-semibold bg-emerald-500 text-white rounded-full">
+                          Available
+                        </span>
+                      </div>
+                    </>
+                  )}
                   <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-gray-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-sm tracking-wide border border-white/40">
