@@ -1,11 +1,12 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const UpdatePage = () => {
+  const router = useRouter();
   const { id } = useParams();
   console.log(id);
   const { data } = authClient.useSession();
@@ -31,14 +32,13 @@ const UpdatePage = () => {
 
     if (id) getPet();
   }, [id]);
-  console.log(pet);
+  // console.log(pet);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const petData = Object.fromEntries(formData.entries());
     // console.log(petData);
-
     const { data: tokenData } = await authClient.token();
     console.log(tokenData);
 
@@ -54,10 +54,10 @@ const UpdatePage = () => {
       },
     );
     const pet = await res.json();
-
+    router.push("/dashboard/my-listing");
     toast.success("Update Successfully");
-    console.log(pet);
-    console.log("Sending update:", petData);
+    // console.log(pet);
+    // console.log("Sending update:", petData);
   };
 
   return (
