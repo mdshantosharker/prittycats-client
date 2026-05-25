@@ -5,11 +5,12 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaEye, FaPaw } from "react-icons/fa";
 import { useRouter, useSearchParams } from "next/navigation";
+import LoadingPage from "../loading";
 
 const AllPetsPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [species, setSpecies] = useState(searchParams.get("species") || "");
   const [pets, setPets] = useState([]);
@@ -21,9 +22,13 @@ const AllPetsPage = () => {
     if (search) query.append("search", search);
     if (species) query.append("species", species);
 
+    setLoading(true);
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets?${query.toString()}`)
       .then((res) => res.json())
-      .then((data) => setPets(data));
+      .then((data) => {
+        setPets(data);
+        setLoading(false);
+      });
   }, [search, species]);
 
   useEffect(() => {
@@ -92,108 +97,116 @@ const AllPetsPage = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {pets.map((pet) => (
-          <div
-            key={pet._id}
-            className="group relative bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden"
-          >
-            <div className="relative h-72 overflow-hidden">
-              <Image
-                src={pet?.imageUrl || "/default-pet.png"}
-                alt={pet?.name || "pet"}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-              />
+      {loading ? (
+        <>
+          <LoadingPage />
+        </>
+      ) : (
+        <>
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {pets.map((pet) => (
+              <div
+                key={pet._id}
+                className="group relative bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden"
+              >
+                <div className="relative h-72 overflow-hidden">
+                  <Image
+                    src={pet?.imageUrl || "/default-pet.png"}
+                    alt={pet?.name || "pet"}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
 
-              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
 
-              <div className="absolute top-4 left-4 flex gap-2">
-                <span className="px-3 py-1 text-xs font-semibold bg-white/90 dark:bg-gray-800/80 backdrop-blur rounded-full text-gray-700 dark:text-gray-200">
-                  {pet.species}
-                </span>
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className="px-3 py-1 text-xs font-semibold bg-white/90 dark:bg-gray-800/80 backdrop-blur rounded-full text-gray-700 dark:text-gray-200">
+                      {pet.species}
+                    </span>
 
-                <span className="px-3 py-1 text-xs font-bold bg-black/70 text-white rounded-full">
-                  ${pet.adoptionFee}
-                </span>
-              </div>
-
-              {pet.adoptionStatus ? (
-                <>
-                  <div className="absolute top-4 right-4">
-                    <span className="px-3 py-1 text-xs font-semibold bg-red-500 text-white rounded-full">
-                      Adopted
+                    <span className="px-3 py-1 text-xs font-bold bg-black/70 text-white rounded-full">
+                      ${pet.adoptionFee}
                     </span>
                   </div>
-                </>
-              ) : (
-                <>
-                  <div className="absolute top-4 right-4">
-                    <span className="px-3 py-1 text-xs font-semibold bg-emerald-500 text-white rounded-full">
-                      Available
-                    </span>
+
+                  {pet.adoptionStatus ? (
+                    <>
+                      <div className="absolute top-4 right-4">
+                        <span className="px-3 py-1 text-xs font-semibold bg-red-500 text-white rounded-full">
+                          Adopted
+                        </span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="absolute top-4 right-4">
+                        <span className="px-3 py-1 text-xs font-semibold bg-emerald-500 text-white rounded-full">
+                          Available
+                        </span>
+                      </div>
+                    </>
+                  )}
+
+                  <div className="absolute bottom-4 left-4">
+                    <h2 className="text-white text-2xl font-bold drop-shadow-lg">
+                      {pet.name}
+                    </h2>
                   </div>
-                </>
-              )}
+                </div>
 
-              <div className="absolute bottom-4 left-4">
-                <h2 className="text-white text-2xl font-bold drop-shadow-lg">
-                  {pet.name}
-                </h2>
-              </div>
-            </div>
-
-            <div className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                {[
-                  ["Breed", pet.breed],
-                  ["Age", pet.age],
-                  ["Health", pet.healthStatus],
-                  ["Location", pet.location],
-                ].map(([label, value], i) => (
-                  <div
-                    key={i}
-                    className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3"
-                  >
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {label}
-                    </p>
-                    <p className="font-semibold text-gray-900 dark:text-gray-100">
-                      {value}
-                    </p>
+                <div className="p-6 space-y-4">
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    {[
+                      ["Breed", pet.breed],
+                      ["Age", pet.age],
+                      ["Health", pet.healthStatus],
+                      ["Location", pet.location],
+                    ].map(([label, value], i) => (
+                      <div
+                        key={i}
+                        className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3"
+                      >
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          {label}
+                        </p>
+                        <p className="font-semibold text-gray-900 dark:text-gray-100">
+                          {value}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
 
-              <div className="flex gap-3 pt-2">
-                <Link href={`/pet-details/${pet._id}`} className="w-1/2">
-                  <button className="w-full py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition flex items-center justify-center gap-2 cursor-pointer">
-                    <FaEye />
-                    Details
-                  </button>
-                </Link>
+                  <div className="flex gap-3 pt-2">
+                    <Link href={`/pet-details/${pet._id}`} className="w-1/2">
+                      <button className="w-full py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition flex items-center justify-center gap-2 cursor-pointer">
+                        <FaEye />
+                        Details
+                      </button>
+                    </Link>
 
-                {pet.adoptionStatus === "closed" ? (
-                  <button
-                    disabled
-                    className="w-1/2 py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold opacity-50 cursor-not-allowed flex items-center justify-center gap-2"
-                  >
-                    <FaPaw />
-                    Adopted
-                  </button>
-                ) : (
-                  <Link href={`/pet-details/${pet._id}`} className="w-1/2">
-                    <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:opacity-90 hover:scale-[1.02] transition flex items-center justify-center gap-2 cursor-pointer">
-                      <FaPaw />
-                      Adopt
-                    </button>
-                  </Link>
-                )}
+                    {pet.adoptionStatus === "closed" ? (
+                      <button
+                        disabled
+                        className="w-1/2 py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold opacity-50 cursor-not-allowed flex items-center justify-center gap-2"
+                      >
+                        <FaPaw />
+                        Adopted
+                      </button>
+                    ) : (
+                      <Link href={`/pet-details/${pet._id}`} className="w-1/2">
+                        <button className="w-full py-3 rounded-xl bg-linear-to-r from-pink-500 to-indigo-500 text-white font-semibold hover:opacity-90 hover:scale-[1.02] transition flex items-center justify-center gap-2 cursor-pointer">
+                          <FaPaw />
+                          Adopt
+                        </button>
+                      </Link>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </section>
   );
 };
