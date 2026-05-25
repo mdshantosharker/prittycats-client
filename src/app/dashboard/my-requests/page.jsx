@@ -48,9 +48,12 @@ const MyRequestsPage = () => {
     });
 
     if (result.isConfirmed) {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${id}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       const data = await res.json();
 
@@ -113,7 +116,7 @@ const MyRequestsPage = () => {
               <p className="text-xs font-medium tracking-wider text-gray-400 uppercase md:hidden">
                 Pet Name
               </p>
-              <h2 className="font-bold text-black  text-lg tracking-tight wrap-break-word whitespace-normal">
+              <h2 className="font-bold  text-black  text-lg tracking-tight wrap-break-word whitespace-normal">
                 {request.name}
               </h2>
             </div>
@@ -154,7 +157,6 @@ const MyRequestsPage = () => {
               </p>
             </div>
 
-           
             <div className="space-y-1">
               <p className="text-xs font-medium tracking-wider text-gray-400 uppercase md:hidden">
                 Status

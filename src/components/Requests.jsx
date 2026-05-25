@@ -85,7 +85,7 @@ const Requests = ({ petId }) => {
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div>
-                            <h3 className="text-xl font-bold text-gray-900  mt-1">
+                            <h3 className="text-xl  dark:text-white font-bold text-gray-900  mt-1">
                               {request.userName}
                             </h3>
 
@@ -94,7 +94,7 @@ const Requests = ({ petId }) => {
                             </p>
 
                             {request.picUpDate && (
-                              <p className="mt-3 text-sm text-gray-700">
+                              <p className="mt-3 text-sm text-gray-700 dark:text-gray-200">
                                 <span className="font-semibold">
                                   Pickup Date:
                                 </span>{" "}
@@ -158,7 +158,7 @@ const Requests = ({ petId }) => {
             <Modal.Footer>
               <Button
                 slot="close"
-                className="w-full rounded-2xl bg-black text-white font-semibold"
+                className="w-full rounded-2xl bg-black text-white font-semibold dark:bg-white dark:text-black dark:hover:bg-gray-500"
               >
                 Close
               </Button>
