@@ -20,7 +20,7 @@ const AllPetsPage = () => {
     if (search) query.append("search", search);
     if (species) query.append("species", species);
 
-    fetch(`http://localhost:5000/pets?${query.toString()}`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets?${query.toString()}`)
       .then((res) => res.json())
       .then((data) => setPets(data));
   }, [search, species]);

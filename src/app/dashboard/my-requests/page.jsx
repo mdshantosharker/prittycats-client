@@ -19,7 +19,7 @@ const MyRequestsPage = () => {
 
       try {
         const res = await fetch(
-          `http://localhost:5000/adopted?userId=${user?.id}`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/adopted?userId=${user?.id}`,
         );
 
         const data = await res.json();
@@ -48,7 +48,7 @@ const MyRequestsPage = () => {
     });
 
     if (result.isConfirmed) {
-      const res = await fetch(`http://localhost:5000/adopted/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${id}`, {
         method: "DELETE",
       });
 

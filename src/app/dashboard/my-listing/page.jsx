@@ -15,7 +15,7 @@ const MyListing = async () => {
   console.log(token);
 
   const res = await fetch(
-    `http://localhost:5000/my-pets?ownerEmail=${session?.user?.email}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-pets?ownerEmail=${session?.user?.email}`,
     {
       method: "GET",
       headers: {

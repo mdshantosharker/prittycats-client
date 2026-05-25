@@ -13,7 +13,7 @@ Prittycats is a high-performance, production-ready full-stack pet adoption ecosy
 
 ## 🔗 Quick Links
 
-- 🌍 **Live Application:** [prittycats.vercel.app](https://your-live-link.com)
+- 🌍 **Live Application:** [prittycats-client.vercel.app](https://prittycats-client.vercel.app)
 - 💻 **Client Repository:** [github.com/mdshantosharker/prittycats-client](https://github.com/mdshantosharker/prittycats-client)
 - 🧠 **Server Repository:** [github.com/mdshantosharker/prittycats-server](https://github.com/mdshantosharker/prittycats-server)
 

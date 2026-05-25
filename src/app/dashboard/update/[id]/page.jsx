@@ -17,7 +17,7 @@ const UpdatePage = () => {
     const getPet = async () => {
       const { data: tokenData } = await authClient.token();
       console.log(tokenData);
-      const res = await fetch(`http://localhost:5000/pets/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`, {
         headers: {
           authorization: `Bearer ${tokenData?.token}`,
         },
@@ -39,7 +39,7 @@ const UpdatePage = () => {
     const { data: tokenData } = await authClient.token();
     console.log(tokenData);
 
-    const res = await fetch(`http://localhost:5000/pets/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

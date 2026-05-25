@@ -20,7 +20,7 @@ const AdoptionFrom = ({ pet }) => {
       try {
         if (!user?.id || !pet?._id) return;
         const res = await fetch(
-          `http://localhost:5000/adopted/${pet._id}/${user.id}`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${pet._id}/${user.id}`,
         );
         const data = await res.json();
         setRequestData(data || null);
@@ -58,7 +58,7 @@ const AdoptionFrom = ({ pet }) => {
     const { data: tokenData } = await authClient.token();
     console.log(tokenData);
 
-    const res = await fetch("http://localhost:5000/adopted", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopted`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

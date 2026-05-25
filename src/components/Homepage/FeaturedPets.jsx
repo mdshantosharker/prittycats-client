@@ -17,7 +17,7 @@ const FeaturedPets = () => {
 
   useEffect(() => {
     const fetchPets = async () => {
-      const res = await fetch("http://localhost:5000/pets");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets`);
       const data = await res.json();
       setPets(data);
     };

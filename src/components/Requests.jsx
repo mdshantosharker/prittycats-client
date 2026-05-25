@@ -11,7 +11,7 @@ const Requests = ({ petId }) => {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch(`http://localhost:5000/adopted/${petId}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${petId}`);
       const data = await res.json();
       setAdopted(data.adopted || data);
     };
@@ -20,7 +20,7 @@ const Requests = ({ petId }) => {
 
   // console.log(petId);
   const updateStatus = async (id, status) => {
-    await fetch(`http://localhost:5000/adopted/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +28,7 @@ const Requests = ({ petId }) => {
       body: JSON.stringify({ status }),
     });
 
-    const updatedRes = await fetch(`http://localhost:5000/adopted/${petId}`);
+    const updatedRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${petId}`);
 
     const updatedData = await updatedRes.json();
     setAdopted(updatedData);
