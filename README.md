@@ -43,7 +43,7 @@ Prittycats is a high-performance, production-ready full-stack pet adoption ecosy
 | Layer        | Technology             | Key Libraries                                         |
 | :----------- | :--------------------- | :---------------------------------------------------- |
 | **Frontend** | Next.js / Tailwind CSS | framer-motion,lottie-react, swiper, React Toastify    |
-| **Backend**  | Node.js / Express.js   | Mongoose, JSONWebToken, Cookie-Parser, CORS, BcryptJS |
+| **Backend**  | Node.js / Express.js   | Mongoose, JSONWebToken, Cookie-Parser, CORS |
 | **Database** | MongoDB Atlas          | Native Indexed Arrays, Dynamic Aggregations           |
 
 ---
