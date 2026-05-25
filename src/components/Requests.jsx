@@ -11,7 +11,9 @@ const Requests = ({ petId }) => {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${petId}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${petId}`,
+      );
       const data = await res.json();
       setAdopted(data.adopted || data);
     };
@@ -28,7 +30,9 @@ const Requests = ({ petId }) => {
       body: JSON.stringify({ status }),
     });
 
-    const updatedRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${petId}`);
+    const updatedRes = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/adopted/${petId}`,
+    );
 
     const updatedData = await updatedRes.json();
     setAdopted(updatedData);
@@ -81,13 +85,13 @@ const Requests = ({ petId }) => {
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div>
-                            <p className="text-gray-500 mt-1">
-                              {request.userName}
-                            </p>
-
-                            <h3 className="text-xl font-bold text-gray-900">
+                            <h3 className="text-xl font-bold text-gray-900  mt-1">
                               {request.userName}
                             </h3>
+
+                            <p className=" text-gray-500">
+                              {request.userEmail}
+                            </p>
 
                             {request.picUpDate && (
                               <p className="mt-3 text-sm text-gray-700">

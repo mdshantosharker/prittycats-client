@@ -2,10 +2,12 @@
 
 import { authClient } from "@/lib/auth-client";
 import { ObjectId } from "bson";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 
 const AddPetPage = () => {
+  const router = useRouter();
   const { data } = authClient.useSession();
   const user = data?.user;
   console.log(user);
@@ -38,7 +40,7 @@ const AddPetPage = () => {
       }
 
       const pet = await petRes.json();
-
+      router.push("/dashboard/my-listing");
       toast.success("Successfully Pet Added");
     } catch (error) {
       toast.error(error.message || "Something went wrong");
@@ -79,19 +81,19 @@ const AddPetPage = () => {
               name="species"
               className="w-full border border-gray-200 dark:border-zinc-700 rounded-xl px-4 py-3 outline-none transition focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white bg-gray-50/50 dark:bg-zinc-800/50 text-gray-900 dark:text-white"
             >
-              <option value="" className="dark:bg-zinc-900">
+              <option value="" className="">
                 Select Species
               </option>
-              <option value="Dog" className="dark:bg-zinc-900">
+              <option value="Dog" className="">
                 Dog
               </option>
-              <option value="Cat" className="dark:bg-zinc-900">
+              <option value="Cat" className="">
                 Cat
               </option>
-              <option value="Bird" className="dark:bg-zinc-900">
+              <option value="Bird" className="">
                 Bird
               </option>
-              <option value="Rabbit" className="dark:bg-zinc-900">
+              <option value="Rabbit" className="">
                 Rabbit
               </option>
             </select>
@@ -129,15 +131,9 @@ const AddPetPage = () => {
               name="gender"
               className="w-full border border-gray-200 dark:border-zinc-700 rounded-xl px-4 py-3 outline-none transition focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white bg-gray-50/50 dark:bg-zinc-800/50 text-gray-900 dark:text-white"
             >
-              <option value="" className="dark:bg-zinc-900">
-                Select Gender
-              </option>
-              <option value="Male" className="dark:bg-zinc-900">
-                Male
-              </option>
-              <option value="Female" className="dark:bg-zinc-900">
-                Female
-              </option>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
           </div>
 
@@ -173,15 +169,9 @@ const AddPetPage = () => {
               name="vaccinationStatus"
               className="w-full border border-gray-200 dark:border-zinc-700 rounded-xl px-4 py-3 outline-none transition focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white bg-gray-50/50 dark:bg-zinc-800/50 text-gray-900 dark:text-white"
             >
-              <option value="" className="dark:bg-zinc-900">
-                Select Status
-              </option>
-              <option value="Vaccinated" className="dark:bg-zinc-900">
-                Vaccinated
-              </option>
-              <option value="Not Vaccinated" className="dark:bg-zinc-900">
-                Not Vaccinated
-              </option>
+              <option value="">Select Status</option>
+              <option value="Vaccinated">Vaccinated</option>
+              <option value="Not Vaccinated">Not Vaccinated</option>
             </select>
           </div>
 
