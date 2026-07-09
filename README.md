@@ -86,3 +86,101 @@ graph LR
 
 
 ```
+# 🚀 Getting Started (Run Locally)
+
+Follow the steps below to set up and run the **prittycats-client** on your local machine.
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/mdshantosharker/prittycats-client.git
+cd prittycats-client
+```
+
+---
+
+## 2️⃣ Install Dependencies
+
+Using **npm**
+
+```bash
+npm install
+```
+
+Or using **Yarn**
+
+```bash
+yarn install
+```
+
+---
+
+## 3️⃣ Configure Environment Variables
+
+Create a **`.env.local`** file in the project root and add the following variables.
+
+```env
+# Authentication
+BETTER_AUTH_SECRET=YOUR_SECRET
+BETTER_AUTH_URL=http://localhost:3000
+
+# Database
+MONGODB_URI=YOUR_MONGODB_URI
+
+# Application URLs
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_SERVER_URL=http://localhost:5000
+GOOGLE_CLIENT_ID=YOUR_CLIENT_ID
+GOOGLE_CLIENT_SECRET=YOUR_CLIENT_SECRET
+
+
+```
+
+> **⚠️ Security Notice**
+>
+> Never commit your real API keys, secrets, or production credentials to GitHub.
+> Keep your `.env.local` file inside `.gitignore`.
+
+---
+
+## 4️⃣ Start the Development Server
+
+Using **npm**
+
+```bash
+npm run dev
+```
+
+Or using **Yarn**
+
+```bash
+yarn dev
+```
+
+---
+
+## 🌐 Open in Browser
+
+Visit the following URL after the server starts:
+
+```text
+http://localhost:3000
+```
+
+---
+
+# ☁️ Deployment
+
+The application is optimized for deployment on **Vercel**.
+
+### Live Website
+
+🔗 https://prittycats-client.vercel.app
+
+### Learn More
+
+For deployment details, check the official Next.js documentation.
+
+https://nextjs.org/docs/app/building-your-application/deploying
+
+---
